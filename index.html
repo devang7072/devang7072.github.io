@@ -3,117 +3,428 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - InvoicePro</title>
+  <title>Devang | Android App Developer Portfolio & Legal Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1e3a8a;
-      --text: #1f2937;
-      --bg: #f9fafb;
-      --card: #ffffff;
-      --border: #e5e7eb;
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --accent: #fedc0b;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: var(--bg);
-      margin: 0;
-      padding: 40px 20px;
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
     .container {
-      max-width: 780px;
+      max-width: 1080px;
       margin: 0 auto;
-      background: var(--card);
-      padding: 40px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 48px 24px;
+      width: 100%;
+      flex: 1;
     }
-    h1 {
-      color: var(--primary);
+
+    /* Header Profile */
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+      padding: 32px 0 20px;
+    }
+
+    .avatar-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1e3a8a, #045dd5);
+      color: #ffffff;
       font-size: 28px;
-      margin-top: 0;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 16px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
-    h2 {
-      color: var(--primary);
+
+    h1 {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
       font-size: 18px;
-      margin-top: 28px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      font-weight: 400;
     }
-    p, li {
-      font-size: 15px;
-      color: #4b5563;
+
+    /* Section Title */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
     }
-    .highlight-box {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin: 20px 0;
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #e5e7eb;
+      letter-spacing: -0.01em;
     }
-    .highlight-box p {
-      margin: 0;
-      color: #1e40af;
+
+    .apps-count {
+      font-size: 13px;
+      color: var(--text-muted);
+      background: #1f2937;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    /* Apps Grid */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      border-color: #374151;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-card-top {
+      margin-bottom: 24px;
+    }
+
+    .app-icon-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .app-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .icon-invoice {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      color: white;
+    }
+
+    .icon-clap {
+      background: linear-gradient(135deg, #f59e0b, #fedc0b);
+      color: #18181b;
+    }
+
+    .app-meta h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .app-category {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .app-category.clap-cat {
+      color: #f59e0b;
+    }
+
+    .app-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .app-features {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .feature-chip {
+      font-size: 12px;
+      background: #1f2937;
+      color: #d1d5db;
+      padding: 4px 10px;
+      border-radius: 6px;
       font-weight: 500;
     }
-    footer {
-      margin-top: 36px;
-      font-size: 13px;
-      color: #9ca3af;
+
+    .app-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
       text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+      border: 1px solid #374151;
+    }
+
+    .btn-secondary:hover {
+      background: #374151;
+      color: #ffffff;
+    }
+
+    /* Privacy Commitment Banner */
+    .privacy-commitment {
+      background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 48px;
+    }
+
+    .privacy-commitment h3 {
+      font-size: 20px;
+      color: #ffffff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .privacy-commitment p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .commitment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .commitment-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .commitment-item strong {
+      display: block;
+      color: #f3f4f6;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .commitment-item span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-bottom: 12px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Privacy Policy for InvoicePro</h1>
-    <p><strong>Effective Date:</strong> October 28, 2026</p>
-    <p><strong>Last Updated:</strong> October 28, 2026</p>
+    <header>
+      <div class="avatar-badge">D</div>
+      <h1>Devang Bhumbhaliya</h1>
+      <p class="subtitle">Independent Android Developer specializing in offline-first utilities, on-device machine learning, and clean mobile user experiences.</p>
+    </header>
 
-    <div class="highlight-box">
-      <p><strong>Summary:</strong> InvoicePro is an offline-first application. All your invoices, client details, financial totals, and signatures are stored strictly on your local device. We do not transmit, sell, or collect your personal or financial data on external servers.</p>
+    <div class="section-header">
+      <h2>Published Applications</h2>
+      <span class="apps-count">2 Apps</span>
     </div>
 
-    <h2>1. Information We Process</h2>
-    <p>InvoicePro enables you to create and export invoices on your mobile device. In doing so, the application processes:</p>
-    <ul>
-      <li><strong>Business Information:</strong> Company name, address, email, phone number, and tax identification numbers entered by you.</li>
-      <li><strong>Client Information:</strong> Client contact details and billing addresses entered into your local directory.</li>
-      <li><strong>Transaction Data:</strong> Invoice numbers, line item descriptions, rates, quantities, taxes, discounts, and payment notes.</li>
-      <li><strong>Digital Signatures:</strong> Signature strokes entered on the canvas to sign invoices.</li>
-    </ul>
+    <div class="apps-grid">
+      <!-- App 1: InvoicePro -->
+      <div class="app-card">
+        <div class="app-card-top">
+          <div class="app-icon-wrap">
+            <div class="app-icon icon-invoice">📄</div>
+            <div class="app-meta">
+              <span class="app-category">Business & Productivity</span>
+              <h3>InvoicePro</h3>
+            </div>
+          </div>
+          <p>Fast, offline-first invoice and estimate creator. Create professional PDF receipts, manage client directories, track tax rates, and capture digital signatures locally on your device.</p>
+          <div class="app-features">
+            <span class="feature-chip">100% Offline-First</span>
+            <span class="feature-chip">PDF Generator</span>
+            <span class="feature-chip">Digital Signatures</span>
+            <span class="feature-chip">Zero Cloud Storage</span>
+          </div>
+        </div>
+        <div class="app-actions">
+          <a href="./invoicepro/" class="btn btn-secondary">Privacy Policy</a>
+          <a href="https://play.google.com/store/apps/details?id=com.invoicepro.app" target="_blank" rel="noopener" class="btn btn-primary">Google Play</a>
+        </div>
+      </div>
 
-    <h2>2. Data Storage & Security</h2>
-    <p>All data created within InvoicePro is saved locally on your device's private sandbox storage using Android secure local preferences. No data is synchronized or uploaded to any third-party cloud servers. You retain 100% ownership and control over your financial records.</p>
+      <!-- App 2: ClapGuard -->
+      <div class="app-card">
+        <div class="app-card-top">
+          <div class="app-icon-wrap">
+            <div class="app-icon icon-clap">👏</div>
+            <div class="app-meta">
+              <span class="app-category clap-cat">Tools & Security</span>
+              <h3>ClapGuard: Find Phone</h3>
+            </div>
+          </div>
+          <p>Never lose your phone in your room or under cushions again! Find your phone instantly by clapping or whistling. Features on-device acoustic AI, anti-theft motion alarms, and bright strobe flashlight.</p>
+          <div class="app-features">
+            <span class="feature-chip">Acoustic AI Locator</span>
+            <span class="feature-chip">Anti-Theft Guard</span>
+            <span class="feature-chip">Strobe Flashlight</span>
+            <span class="feature-chip">RAM Audio Only</span>
+          </div>
+        </div>
+        <div class="app-actions">
+          <a href="./clapguard/" class="btn btn-secondary">Privacy Policy</a>
+          <a href="https://play.google.com/store/apps/details?id=com.soundguard.findphone.clap" target="_blank" rel="noopener" class="btn btn-primary">Google Play</a>
+        </div>
+      </div>
+    </div>
 
-    <h2>3. PDF Export and Sharing</h2>
-    <p>When you choose to export or share an invoice PDF (e.g., via WhatsApp, Email, or Google Drive), the PDF file is generated locally on your device and handed off to your device's native system sharing intent. No intermediary server processes or reads your PDF document.</p>
-
-    <h2>4. In-App Purchases & Payments</h2>
-    <p>If you purchase InvoicePro Premium, payments and subscriptions are processed directly and securely by <strong>Google Play Billing</strong>. We do not store, process, or have access to your credit card, debit card, UPI, or banking information. All transactions adhere to Google Play's Privacy Policy and Security Standards.</p>
-
-    <h2>5. Third-Party Services & Advertising</h2>
-    <p>For users on the free tier, InvoicePro uses <strong>Google AdMob</strong> to display advertisements. Google AdMob may process non-sensitive device identifiers (such as Android Advertising ID) and general device telemetry to deliver relevant, fraud-free ad experiences in compliance with Google's Privacy & Terms. Users who upgrade to <strong>InvoicePro Premium</strong> enjoy a 100% ad-free experience, with all ad requests disabled.</p>
-
-    <h2>6. Permissions Requested</h2>
-    <ul>
-      <li><strong>Storage / Media:</strong> Required only when you explicitly choose to export and save a generated PDF document to your device's file system.</li>
-    </ul>
-
-    <h2>7. Children's Privacy</h2>
-    <p>InvoicePro is designed for professionals, freelancers, and small business operators. We do not knowingly collect information from children under the age of 13.</p>
-
-    <h2>8. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy from time to time. Any changes will be reflected with a revised "Last Updated" date at the top of this document.</p>
-
-    <h2>9. Contact Us</h2>
-    <p>If you have any questions or feedback regarding this Privacy Policy, please contact our support team at:<br>
-    <strong>Email:</strong> support@invoicepro.app</p>
-
-    <footer>
-      &copy; 2026 InvoicePro. All rights reserved.
-    </footer>
+    <!-- Privacy & Architecture Commitment -->
+    <div class="privacy-commitment">
+      <h3>🛡️ Privacy & Architecture Commitment</h3>
+      <p>All applications developed under this portfolio are built with an uncompromising commitment to privacy and data sovereignty. We believe your data belongs exclusively to you.</p>
+      
+      <div class="commitment-grid">
+        <div class="commitment-item">
+          <strong>Local Device Processing</strong>
+          <span>Microphone acoustic analysis and document storage run 100% on-device in local sandbox memory.</span>
+        </div>
+        <div class="commitment-item">
+          <strong>Zero Cloud Tracking</strong>
+          <span>We do not run private analytics servers, track your personal documents, or sell user records.</span>
+        </div>
+        <div class="commitment-item">
+          <strong>Official AdMob Transparency</strong>
+          <span>Advertisements adhere strictly to Google Play policy and IAB <code>app-ads.txt</code> verified standards.</span>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="./invoicepro/">InvoicePro Privacy</a>
+      &bull;
+      <a href="./clapguard/">ClapGuard Privacy</a>
+      &bull;
+      <a href="./app-ads.txt">app-ads.txt</a>
+      &bull;
+      <a href="mailto:databydevang@gmail.com">Developer Support</a>
+    </div>
+    <p>&copy; 2026 Devang Bhumbhaliya. All rights reserved.</p>
+  </footer>
 </body>
 </html>
