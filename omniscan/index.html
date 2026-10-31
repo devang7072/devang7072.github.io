@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - OmniScan: QR & Barcode AI</title>
+  <style>
+    :root {
+      --primary: #00a854;
+      --primary-dark: #007a3d;
+      --accent: #00b0ff;
+      --text: #1f2937;
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .back-nav {
+      margin-bottom: 24px;
+    }
+    .back-nav a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .back-nav a:hover {
+      text-decoration: underline;
+    }
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .app-header img {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0, 168, 84, 0.25);
+    }
+    h1 {
+      color: #111827;
+      font-size: 26px;
+      margin: 0;
+    }
+    .meta-date {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 20px 0;
+    }
+    h2 {
+      color: #111827;
+      font-size: 18px;
+      margin-top: 28px;
+      border-left: 3px solid var(--primary);
+      padding-left: 10px;
+    }
+    p, li {
+      font-size: 15px;
+      color: #4b5563;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .highlight-box {
+      background: #f0fdf4;
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .highlight-box p {
+      margin: 0;
+      color: #166534;
+      font-weight: 500;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #374151;
+    }
+    footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-nav">
+      <a href="../">&larr; Back to Developer Apps Hub</a>
+    </div>
+
+    <div class="app-header">
+      <img src="icon.png" alt="OmniScan Icon">
+      <div>
+        <h1>Privacy Policy for OmniScan: QR & Barcode AI</h1>
+        <div class="meta-date"><strong>Effective Date:</strong> October 31, 2026 &bull; <strong>Version:</strong> 2.2.3</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="highlight-box">
+      <p><strong>On-Device Vision AI Guarantee:</strong> OmniScan is built with an offline-first architecture. All camera frames, barcode recognition, and QR code generation are performed 100% on your device using Google ML Kit. Your camera feed, scanned codes, and personal content are NEVER stored on remote servers, uploaded, or transmitted over the internet.</p>
+    </div>
+
+    <h2>1. Introduction & Overview</h2>
+    <p>This Privacy Policy outlines how <strong>OmniScan: QR & Barcode AI</strong> ("we", "our", or "the application"), developed by <strong>Devang Bhumbhaliya</strong>, handles and protects your data. We respect your privacy and believe that mobile utilities should serve you without collecting or selling your personal information.</p>
+
+    <h2>2. Camera & Flashlight Permission</h2>
+    <p>OmniScan requests the <code>android.permission.CAMERA</code> and <code>android.permission.FLASHLIGHT</code> permissions strictly to deliver core scanning features:</p>
+    <ul>
+      <li><strong>Real-Time Scanning:</strong> Optical camera frames are fed directly into local, on-device machine learning models (Google Play Services ML Kit) to decode 1D and 2D barcodes.</li>
+      <li><strong>Zero Video Recording:</strong> The application does not record, take hidden photos, save video files, or transmit camera imagery to any third-party server.</li>
+      <li><strong>Flashlight:</strong> The torch is activated solely when you tap the flashlight button to illuminate barcodes in dim environments.</li>
+    </ul>
+
+    <h2>3. Photos & Media Storage Access</h2>
+    <p>OmniScan accesses your device storage only upon explicit user request:</p>
+    <ul>
+      <li><strong>Gallery Image Import:</strong> When you choose to scan a barcode from an existing photo, the Android system file picker is launched. Only the selected image is inspected locally in volatile RAM.</li>
+      <li><strong>Saving Custom QR Codes:</strong> When you generate a custom QR code and tap "Save to Gallery", the resulting PNG image is saved directly into your device's public <code>Pictures/OmniScan</code> directory via the standard Android MediaStore API.</li>
+    </ul>
+
+    <h2>4. Wi-Fi & Quick Actions</h2>
+    <p>When you scan a Wi-Fi QR code, OmniScan allows you to copy the network credentials and opens the system Android Wi-Fi settings screen. The app does not intercept your web traffic, monitor connected devices, or modify network security settings without your knowledge.</p>
+
+    <h2>5. Local History & Data Storage</h2>
+    <p>OmniScan provides an optional scan history and favorites list to help you access past codes:</p>
+    <ul>
+      <li>All scan records and generated QR codes are saved inside a secure, encrypted on-device SQLite/Room database located exclusively in your application's private sandbox memory.</li>
+      <li>Your history is never synchronized with any cloud database.</li>
+      <li>You have complete control to delete individual history entries or wipe all history at any time from the app interface.</li>
+    </ul>
+
+    <h2>6. Third-Party Advertising (Google AdMob)</h2>
+    <p>OmniScan is supported through non-intrusive advertisements served by <strong>Google AdMob</strong>.</p>
+    <ul>
+      <li><strong>Advertising Identifiers:</strong> In accordance with Google Play policy, Google AdMob may collect and process pseudonymous identifiers such as the Android Advertising ID (<code>AD_ID</code>), general device characteristics, and approximate IP location to serve relevant advertisements.</li>
+      <li><strong>No Personal Scanned Data Sharing:</strong> Your camera feed, scanned barcodes, contacts, Wi-Fi keys, and generated QR codes are NEVER shared with or accessible by advertising networks.</li>
+      <li>For further details regarding Google's advertising practices, please review the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy & Terms Policy</a>.</li>
+    </ul>
+
+    <h2>7. Children's Privacy</h2>
+    <p>OmniScan is a general utility tool and does not knowingly collect personally identifiable information from children under the age of 13. If you believe your child has provided us with personal information, please contact us so we can take immediate corrective measures.</p>
+
+    <h2>8. Security Safeguards</h2>
+    <p>Because all scanning and generation occurs locally on your device, your sensitive information (such as personal contacts, Wi-Fi credentials, and private URLs) remains isolated within Android's strict application sandbox, shielded from external interceptors.</p>
+
+    <h2>9. Policy Updates</h2>
+    <p>We may update this Privacy Policy periodically to reflect app updates or regulatory changes. Any modifications will be posted to this URL with a revised effective date.</p>
+
+    <h2>10. Developer Contact</h2>
+    <p>If you have any questions, suggestions, or concerns regarding this Privacy Policy or OmniScan, please reach out to us:</p>
+    <p>
+      <strong>Developer:</strong> Devang Bhumbhaliya<br>
+      <strong>Email:</strong> <a href="mailto:databydevang@gmail.com">databydevang@gmail.com</a><br>
+      <strong>Developer Portal:</strong> <a href="https://devang7072.github.io" target="_blank" rel="noopener">https://devang7072.github.io</a>
+    </p>
+
+    <footer>
+      &copy; 2026 OmniScan: QR & Barcode AI &bull; All rights reserved. &bull; <a href="../" style="color:#9ca3af; text-decoration:none;">Developer Home</a>
+    </footer>
+  </div>
+</body>
+</html>

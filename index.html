@@ -171,6 +171,11 @@
       color: #18181b;
     }
 
+    .icon-omniscan {
+      background: linear-gradient(135deg, #007a3d, #00e676);
+      color: #0b0f19;
+    }
+
     .app-meta h3 {
       font-size: 20px;
       font-weight: 700;
@@ -188,6 +193,10 @@
 
     .app-category.clap-cat {
       color: #f59e0b;
+    }
+
+    .app-category.omni-cat {
+      color: #00e676;
     }
 
     .app-card p {
@@ -339,7 +348,7 @@
 
     <div class="section-header">
       <h2>Published Applications</h2>
-      <span class="apps-count">2 Apps</span>
+      <span class="apps-count">3 Apps</span>
     </div>
 
     <div class="apps-grid">
@@ -390,6 +399,30 @@
           <a href="https://play.google.com/store/apps/details?id=com.soundguard.findphone.clap" target="_blank" rel="noopener" class="btn btn-primary">Google Play</a>
         </div>
       </div>
+
+      <!-- App 3: OmniScan -->
+      <div class="app-card">
+        <div class="app-card-top">
+          <div class="app-icon-wrap">
+            <div class="app-icon icon-omniscan">⚡</div>
+            <div class="app-meta">
+              <span class="app-category omni-cat">Vision AI & Utilities</span>
+              <h3>OmniScan: QR & Barcode AI</h3>
+            </div>
+          </div>
+          <p>Lightning-fast QR & barcode scanner with custom QR styling studio, 100% on-device Google ML Kit vision intelligence, instant smart contextual actions, and privacy-first local history.</p>
+          <div class="app-features">
+            <span class="feature-chip">On-Device ML Kit</span>
+            <span class="feature-chip">Custom QR Styler</span>
+            <span class="feature-chip">Smart Actions</span>
+            <span class="feature-chip">Zero Cloud Storage</span>
+          </div>
+        </div>
+        <div class="app-actions">
+          <a href="./omniscan/" class="btn btn-secondary">Privacy Policy</a>
+          <a href="https://play.google.com/store/apps/details?id=com.omniscan.qr.barcode" target="_blank" rel="noopener" class="btn btn-primary">Google Play</a>
+        </div>
+      </div>
     </div>
 
     <!-- Privacy & Architecture Commitment -->
@@ -419,6 +452,8 @@
       <a href="./invoicepro/">InvoicePro Privacy</a>
       &bull;
       <a href="./clapguard/">ClapGuard Privacy</a>
+      &bull;
+      <a href="./omniscan/">OmniScan Privacy</a>
       &bull;
       <a href="./app-ads.txt">app-ads.txt</a>
       &bull;
