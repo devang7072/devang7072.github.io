@@ -112,6 +112,66 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* Featured App Card */
+    .app-card {
+      display: flex;
+      gap: 16px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .app-card:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+    }
+
+    .app-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .app-card-body {
+      flex: 1;
+    }
+
+    .app-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .app-card-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(255, 209, 128, 0.08);
+      color: #ffd180;
+      border: 1px solid rgba(255, 209, 128, 0.25);
+    }
+
+    .app-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
     /* Privacy & Policy Registry (Clean Minimalist List) */
     .policy-list {
       display: flex;
@@ -269,10 +329,29 @@
       <p class="bio">Official developer portal and legal registry. Developing lightweight, privacy-focused Android utilities and intelligent on-device experiences with zero unnecessary data collection.</p>
     </header>
 
+    <!-- Featured Applications -->
+    <section class="section">
+      <div class="section-title">Applications</div>
+      <a href="./zenith/" class="app-card">
+        <img src="./zenith/icon.png" alt="Zenith App Icon" class="app-card-icon">
+        <div class="app-card-body">
+          <div class="app-card-title">
+            Zenith: Minimalist Launcher
+            <span class="app-card-tag">NEW RELEASE</span>
+          </div>
+          <p class="app-card-desc">Scandinavian digital detox homescreen with true OLED battery saving, customizable word clock typography, and biometric app privacy locker. 100% free, zero forced ads.</p>
+        </div>
+      </a>
+    </section>
+
     <!-- Privacy & Legal Policies -->
     <section class="section">
       <div class="section-title">Legal &amp; Privacy Policies</div>
       <div class="policy-list">
+        <a href="./zenith/" class="policy-item">
+          <span class="policy-name">Zenith: Minimalist Launcher</span>
+          <span class="policy-link-label">Privacy Policy &rarr;</span>
+        </a>
         <a href="./kineticfit/" class="policy-item">
           <span class="policy-name">KineticFit Pro</span>
           <span class="policy-link-label">Privacy Policy &rarr;</span>
