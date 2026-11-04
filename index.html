@@ -1,418 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Devang Bhumbhaliya — Android Developer</title>
-  <meta name="description" content="Official developer portal and legal registry for applications developed by Devang Bhumbhaliya.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #000000;
-      --surface: #0a0a0a;
-      --surface-hover: #141414;
-      --border: #222222;
-      --border-hover: #444444;
-      --text-main: #ffffff;
-      --text-muted: #888888;
-      --text-dim: #555555;
-      --accent: #ffffff;
-      --accent-contrast: #000000;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devang Bhumbhaliya · Archival Monograph &amp; Folio of Shipped Works</title>
+<meta name="description" content="Official archival monograph and portfolio of Android applications engineered by Devang Bhumbhaliya Babubhai. Offline-first architectures, on-device machine intelligence, and sovereign privacy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf6ed;
+    --bg-page: #f5eee0;
+    --vellum: #fdfbf7;
+    --border-archival: #dfd6c5;
+    --border-dark: #3a281c;
+    --border-light: rgba(58, 40, 28, 0.12);
+    --ink-black: #17120e;
+    --ink-muted: #5e4f44;
+    --ink-faint: #8a796e;
+    --cognac: #8a492d;
+    --cognac-hover: #a65837;
+    --cognac-subtle: rgba(138, 73, 45, 0.08);
+    --sienna: #b45309;
+    --walnut-card: #201610;
+    --font-serif-display: 'Playfair Display', Georgia, serif;
+    --font-serif-body: 'Newsreader', Garamond, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-mono: 'Geist Mono', monospace;
+  }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: var(--font-sans);
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 64px 24px 48px;
-      width: 100%;
-      flex: 1;
-    }
+  body {
+    background-color: var(--bg);
+    color: var(--ink-black);
+    font-family: var(--font-serif-body);
+    font-size: 16px;
+    line-height: 1.65;
+    min-height: 100vh;
+    background-image: radial-gradient(circle at 15% 15%, rgba(138, 73, 45, 0.05) 0%, transparent 45%);
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* Minimal Profile Header */
-    header {
-      margin-bottom: 48px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--border);
-    }
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
 
-    .monogram {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      font-family: var(--font-mono);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 20px;
-    }
+  /* Archival Header */
+  header.archival-header {
+    border-bottom: 2px solid var(--border-dark);
+    padding: 24px 0 16px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
 
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
+  .header-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cognac);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border-archival);
+  }
 
-    .role-tag {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      display: block;
-      letter-spacing: 0.02em;
-    }
+  .live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #2e7d32;
+    font-weight: 600;
+  }
 
-    .bio {
-      font-size: 15px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #2e7d32;
+    animation: pulseDot 2s infinite ease-in-out;
+  }
 
-    /* Section Styling */
-    .section {
-      margin-bottom: 48px;
-    }
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+  }
 
-    .section-title {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      margin-bottom: 16px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
+  .header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 
-    /* Featured App Card */
-    .app-card {
-      display: flex;
-      gap: 16px;
-      padding: 18px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--text-main);
-      transition: border-color 0.15s ease, background-color 0.15s ease;
-      margin-bottom: 12px;
-      align-items: flex-start;
-    }
+  .founder-title {
+    font-family: var(--font-serif-display);
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--ink-black);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
 
-    .app-card:hover {
-      border-color: var(--border-hover);
-      background: var(--surface-hover);
-    }
+  .founder-title span {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cognac);
+    font-size: 26px;
+    margin-left: 6px;
+  }
 
-    .app-card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      object-fit: cover;
-      flex-shrink: 0;
-    }
+  .archival-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
 
-    .app-card-body {
-      flex: 1;
-    }
+  .archival-nav a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.15s ease;
+  }
 
-    .app-card-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+  .archival-nav a:hover {
+    color: var(--cognac);
+  }
 
-    .app-card-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: rgba(255, 209, 128, 0.08);
-      color: #ffd180;
-      border: 1px solid rgba(255, 209, 128, 0.25);
-    }
+  /* Frontispiece Hero */
+  .hero-frontispiece {
+    padding: 80px 0 72px;
+    border-bottom: 1px solid var(--border-archival);
+  }
 
-    .app-card-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.5;
-    }
+  .frontispiece-layout {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr;
+    gap: 64px;
+    align-items: center;
+  }
 
-    /* Privacy & Policy Registry (Clean Minimalist List) */
-    .policy-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+  .monograph-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: var(--cognac);
+    padding: 5px 12px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
 
-    .policy-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      text-decoration: none;
-      color: var(--text-main);
-      transition: border-color 0.15s ease, background-color 0.15s ease;
-    }
+  h1.frontispiece-headline {
+    font-family: var(--font-serif-display);
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 1.08;
+    color: var(--ink-black);
+    letter-spacing: -0.02em;
+    margin-bottom: 22px;
+  }
 
-    .policy-item:hover {
-      border-color: var(--border-hover);
-      background: var(--surface-hover);
-    }
+  h1.frontispiece-headline em {
+    font-style: italic;
+    color: var(--cognac);
+  }
 
-    .policy-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-main);
-    }
+  .frontispiece-lede {
+    font-size: 20px;
+    font-style: italic;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 660px;
+  }
 
-    .policy-link-label {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s ease;
-    }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
 
-    .policy-item:hover .policy-link-label {
-      color: var(--text-main);
-    }
+  .btn-archival-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    background: var(--ink-black);
+    color: #ffffff;
+    border: 1px solid var(--ink-black);
+    box-shadow: 3px 3px 0px var(--cognac);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
 
-    /* Architecture & Privacy Principles */
-    .principles-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
+  .btn-archival-primary:hover {
+    background: var(--cognac);
+    border-color: var(--cognac);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0px var(--ink-black);
+  }
 
-    .principle-box {
-      padding: 18px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
+  .btn-archival-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    background: transparent;
+    color: var(--ink-black);
+    border: 1px solid var(--border-dark);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
 
-    .principle-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-main);
-      margin-bottom: 6px;
-      font-family: var(--font-mono);
-    }
+  .btn-archival-secondary:hover {
+    background: var(--cognac-subtle);
+    border-color: var(--cognac);
+    color: var(--cognac);
+  }
 
-    .principle-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
+  .hero-numbers-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-archival);
+  }
 
-    /* Developer Support / Contact */
-    .contact-card {
-      padding: 22px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
+  .hero-num-box strong {
+    display: block;
+    font-family: var(--font-serif-display);
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--cognac);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
 
-    .contact-info strong {
-      display: block;
-      font-size: 14px;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
+  .hero-num-box span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
 
-    .contact-info p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+  /* Archival Stamp Card */
+  .archival-stamp-card {
+    background: var(--vellum);
+    border: 2px solid var(--border-dark);
+    padding: 36px 32px;
+    box-shadow: 8px 8px 0px var(--border-dark);
+    position: relative;
+    transition: transform 0.2s ease;
+  }
 
-    .btn-minimal {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
-      padding: 9px 16px;
-      border-radius: 6px;
-      background: var(--accent);
-      color: var(--accent-contrast);
-      text-decoration: none;
-      transition: opacity 0.15s ease;
-    }
+  .archival-stamp-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 12px 12px 0px var(--cognac);
+  }
 
-    .btn-minimal:hover {
-      opacity: 0.85;
-    }
+  .wax-seal {
+    width: 68px;
+    height: 68px;
+    background: radial-gradient(circle at 35% 35%, #b93838 0%, #751a1a 100%);
+    border-radius: 50%;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fdfbf7;
+    font-family: var(--font-serif-display);
+    font-weight: 800;
+    font-size: 26px;
+    box-shadow: 0 6px 16px rgba(117, 26, 26, 0.45);
+    border: 2px dashed rgba(255, 255, 255, 0.35);
+  }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 24px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-    }
+  .stamp-title {
+    font-family: var(--font-serif-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink-black);
+    margin-bottom: 10px;
+  }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 12px;
-    }
+  .stamp-desc {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
 
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
+  .stamp-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-faint);
+    line-height: 1.8;
+    border-top: 1px solid var(--border-archival);
+    padding-top: 18px;
+  }
 
-    .footer-links a:hover {
-      color: var(--text-main);
-    }
-  </style>
+  .stamp-meta div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .stamp-meta strong {
+    color: var(--ink-black);
+    font-weight: 600;
+  }
+
+  /* Portfolio: Folio of Shipped Works */
+  .section-folio {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--border-archival);
+  }
+
+  .folio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 44px;
+    border-bottom: 1px solid var(--border-archival);
+    padding-bottom: 20px;
+  }
+
+  .folio-header h2 {
+    font-family: var(--font-serif-display);
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--ink-black);
+    letter-spacing: -0.01em;
+  }
+
+  .folio-header p {
+    font-size: 16px;
+    color: var(--ink-muted);
+    margin-top: 6px;
+  }
+
+  .folio-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+  }
+
+  .folio-tab {
+    background: transparent;
+    border: 1px solid var(--border-archival);
+    padding: 9px 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .folio-tab.active, .folio-tab:hover {
+    background: var(--ink-black);
+    color: var(--vellum);
+    border-color: var(--ink-black);
+    box-shadow: 2px 2px 0px var(--cognac);
+  }
+
+  /* Folio Exhibition Grid */
+  .folio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .folio-plate {
+    background: var(--vellum);
+    border: 1px solid var(--border-archival);
+    padding: 28px;
+    box-shadow: 6px 6px 0px rgba(58, 40, 28, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    position: relative;
+  }
+
+  .folio-plate:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0px var(--cognac);
+    border-color: var(--cognac);
+  }
+
+  .plate-image-frame {
+    width: 100%;
+    height: 230px;
+    background: #17120e;
+    border: 1px solid var(--border-archival);
+    margin-bottom: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .plate-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .folio-plate:hover .plate-image-frame img {
+    transform: scale(1.04);
+  }
+
+  .plate-number-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--vellum);
+    color: var(--ink-black);
+    font-family: var(--font-serif-display);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border: 1px solid var(--border-archival);
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    letter-spacing: 0.05em;
+  }
+
+  .plate-icon-corner {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    border: 2px solid var(--vellum);
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  .plate-icon-corner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .plate-category {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cognac);
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+  }
+
+  .plate-title {
+    font-family: var(--font-serif-display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink-black);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .plate-desc {
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+    margin-bottom: 22px;
+  }
+
+  .plate-specs-list {
+    border-top: 1px solid var(--border-archival);
+    padding-top: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+
+  .plate-spec-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--ink-faint);
+  }
+
+  .plate-spec-row strong {
+    color: var(--ink-black);
+    font-weight: 600;
+  }
+
+  .plate-actions {
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid var(--border-archival);
+    padding-top: 18px;
+  }
+
+  .btn-plate {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border: 1px solid var(--border-dark);
+    color: var(--ink-black);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .btn-plate:hover {
+    background: var(--cognac);
+    color: #ffffff;
+    border-color: var(--cognac);
+  }
+
+  .btn-plate.btn-play {
+    background: var(--ink-black);
+    color: #ffffff;
+    border-color: var(--ink-black);
+  }
+
+  .btn-plate.btn-play:hover {
+    background: var(--cognac);
+    border-color: var(--cognac);
+  }
+
+  /* Engineering Creed */
+  .section-creed {
+    padding: 88px 0;
+    border-bottom: 2px solid var(--border-dark);
+  }
+
+  .creed-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+
+  .creed-item {
+    border-left: 3px solid var(--cognac);
+    padding-left: 24px;
+  }
+
+  .creed-roman {
+    font-family: var(--font-serif-display);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--cognac);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .creed-item h3 {
+    font-family: var(--font-serif-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink-black);
+    margin-bottom: 10px;
+  }
+
+  .creed-item p {
+    font-size: 15px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+  }
+
+  /* Direct Dispatch Inquiries */
+  .section-dispatch {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border-archival);
+  }
+
+  .dispatch-card {
+    background: var(--vellum);
+    border: 2px solid var(--border-dark);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 6px 6px 0px var(--border-dark);
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .dispatch-info h3 {
+    font-family: var(--font-serif-display);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .dispatch-info p {
+    font-size: 15px;
+    color: var(--ink-muted);
+  }
+
+  /* Archival Footer */
+  footer.archival-footer {
+    padding: 60px 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  .footer-links-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .footer-links-wrap a {
+    color: var(--cognac);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .footer-links-wrap a:hover {
+    color: var(--ink-black);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    .frontispiece-layout { grid-template-columns: 1fr; }
+    .folio-grid { grid-template-columns: 1fr; }
+    .creed-columns { grid-template-columns: 1fr; }
+    h1.frontispiece-headline { font-size: 40px; }
+  }
+</style>
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="monogram">DB</div>
-      <h1>Devang Bhumbhaliya</h1>
-      <span class="role-tag">Android Developer · Offline-First &amp; On-Device ML</span>
-      <p class="bio">Official developer portal and legal registry. Developing lightweight, privacy-focused Android utilities and intelligent on-device experiences with zero unnecessary data collection.</p>
+    
+    <!-- Archival Top Header -->
+    <header class="archival-header">
+      <div class="header-topline">
+        <span>Monograph Series No. 26</span>
+        <span class="live-pill"><span class="live-dot"></span> 5 Production Engines Online · Android 15 Ready</span>
+        <span>Registered MMXXVI</span>
+      </div>
+      <div class="header-main">
+        <a href="#" class="founder-title">
+          Devang Bhumbhaliya <span>Babubhai</span>
+        </a>
+        <ul class="archival-nav">
+          <li><a href="#folio">The Folio</a></li>
+          <li><a href="#creed">Creed</a></li>
+          <li><a href="#dispatch">Dispatch</a></li>
+          <li><a href="./app-ads.txt" style="color:var(--cognac);">app-ads.txt</a></li>
+        </ul>
+      </div>
     </header>
 
-    <!-- Featured Applications -->
-    <section class="section">
-      <div class="section-title">Applications</div>
-      <a href="./zenith/" class="app-card">
-        <img src="./zenith/icon.png" alt="Zenith App Icon" class="app-card-icon">
-        <div class="app-card-body">
-          <div class="app-card-title">
-            Zenith: Minimalist Launcher
-            <span class="app-card-tag">NEW RELEASE</span>
+    <!-- Frontispiece Hero -->
+    <section class="hero-frontispiece">
+      <div class="frontispiece-layout">
+        <div>
+          <span class="monograph-badge">Shipped Works Archive · Commercial Android Releases</span>
+          <h1 class="frontispiece-headline">
+            The Chronicle of <em>Sovereign</em> Mobile Engineering &amp; On-Device Machine Intelligence.
+          </h1>
+          <p class="frontispiece-lede">
+            "A collection of production Android utilities engineered under the premise that user computation belongs on the device, sound belongs in RAM, and code runs with zero surveillance telemetry."
+          </p>
+          <div class="hero-actions">
+            <a href="#folio" class="btn-archival-primary">Examine Folio Plates &darr;</a>
+            <a href="#dispatch" class="btn-archival-secondary">Contact Founder</a>
           </div>
-          <p class="app-card-desc">Scandinavian digital detox homescreen with true OLED battery saving, customizable word clock typography, and biometric app privacy locker. 100% free, zero forced ads.</p>
+          <div class="hero-numbers-strip">
+            <div class="hero-num-box">
+              <strong>5+</strong>
+              <span>Shipped Engines</span>
+            </div>
+            <div class="hero-num-box">
+              <strong>100%</strong>
+              <span>On-Device Memory</span>
+            </div>
+            <div class="hero-num-box">
+              <strong>0 KB</strong>
+              <span>Cloud Telemetry</span>
+            </div>
+          </div>
         </div>
-      </a>
-    </section>
 
-    <!-- Privacy & Legal Policies -->
-    <section class="section">
-      <div class="section-title">Legal &amp; Privacy Policies</div>
-      <div class="policy-list">
-        <a href="./zenith/" class="policy-item">
-          <span class="policy-name">Zenith: Minimalist Launcher</span>
-          <span class="policy-link-label">Privacy Policy &rarr;</span>
-        </a>
-        <a href="./kineticfit/" class="policy-item">
-          <span class="policy-name">KineticFit Pro</span>
-          <span class="policy-link-label">Privacy Policy &rarr;</span>
-        </a>
-        <a href="./invoicepro/" class="policy-item">
-          <span class="policy-name">InvoicePro</span>
-          <span class="policy-link-label">Privacy Policy &rarr;</span>
-        </a>
-        <a href="./clapguard/" class="policy-item">
-          <span class="policy-name">ClapGuard</span>
-          <span class="policy-link-label">Privacy Policy &rarr;</span>
-        </a>
-        <a href="./omniscan/" class="policy-item">
-          <span class="policy-name">OmniScan</span>
-          <span class="policy-link-label">Privacy Policy &rarr;</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Privacy Standards -->
-    <section class="section">
-      <div class="section-title">Core Principles</div>
-      <div class="principles-grid">
-        <div class="principle-box">
-          <div class="principle-title">01 / Local-First Architecture</div>
-          <div class="principle-desc">Application data, documents, and compute workloads execute inside local sandboxed storage on the user's device.</div>
-        </div>
-        <div class="principle-box">
-          <div class="principle-title">02 / Zero Cloud Tracking</div>
-          <div class="principle-desc">No telemetry tracking, no background profiling, and zero user data sharing with undisclosed third parties.</div>
-        </div>
-        <div class="principle-box">
-          <div class="principle-title">03 / Standardized Compliance</div>
-          <div class="principle-desc">Ad transparency and developer identity adhere strictly to IAB standards and verified Google Play developer guidelines.</div>
+        <!-- Archival Ledger Stamp Card -->
+        <div class="archival-stamp-card">
+          <div class="wax-seal">DB</div>
+          <h3 class="stamp-title">Architectural Ledger</h3>
+          <p class="stamp-desc">
+            Verified publisher compliance under IAB <code>app-ads.txt</code> and Google Play developer governance.
+          </p>
+          <div class="stamp-meta">
+            <div><span>PRIMARY LANGUAGE:</span> <strong>Kotlin 2.0 / Compose</strong></div>
+            <div><span>INFERENCE BACKEND:</span> <strong>Google ML Kit (Offline)</strong></div>
+            <div><span>ACOUSTIC ENGINE:</span> <strong>RAM Buffer FFT Filters</strong></div>
+            <div><span>STORAGE MODEL:</span> <strong>Encrypted SQLite / Room</strong></div>
+            <div><span>DIRECT ADMOB:</span> <strong>pub-7686687473347025</strong></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Developer Contact -->
-    <section class="section">
-      <div class="section-title">Support &amp; Inquiries</div>
-      <div class="contact-card">
-        <div class="contact-info">
-          <strong>Developer Inquiries</strong>
-          <p>Support for apps, policy disclosures, or questions.</p>
+    <!-- The Folio of Shipped Works -->
+    <section id="folio" class="section-folio">
+      <div class="folio-header">
+        <div>
+          <h2>The Folio of Shipped Works</h2>
+          <p>Exhibition plates of production software operating on commercial Android devices.</p>
         </div>
-        <a href="mailto:devangrabari7072@gmail.com" class="btn-minimal">Contact Developer</a>
+        <div class="folio-tabs">
+          <button class="folio-tab active" onclick="filterFolio('all')">All Works (5)</button>
+          <button class="folio-tab" onclick="filterFolio('vision')">Vision AI</button>
+          <button class="folio-tab" onclick="filterFolio('audio')">Acoustics</button>
+          <button class="folio-tab" onclick="filterFolio('os')">System OS</button>
+          <button class="folio-tab" onclick="filterFolio('utility')">Utilities</button>
+        </div>
+      </div>
+
+      <div class="folio-grid">
+
+        <!-- Plate I: OmniScan -->
+        <div class="folio-plate" data-folio-cat="vision">
+          <div>
+            <div class="plate-image-frame">
+              <img src="./assets/images/omniscan_feature.png" alt="OmniScan Feature Graphic">
+              <span class="plate-number-badge">PLATE I · VISION AI</span>
+              <div class="plate-icon-corner">
+                <img src="./assets/images/omniscan_icon.png" alt="OmniScan Icon">
+              </div>
+            </div>
+            <span class="plate-category">Computer Vision · Machine Learning</span>
+            <h3 class="plate-title">OmniScan: QR &amp; Barcode AI</h3>
+            <p class="plate-desc">
+              High-throughput offline QR scanner engineered with Google ML Kit vision models. Decodes dense 2D matrices in under 10ms with custom studio styling, contextual actions, and local database archiving.
+            </p>
+            <div class="plate-specs-list">
+              <div class="plate-spec-row"><span>Inference Engine:</span> <strong>On-Device ML Kit (Offline)</strong></div>
+              <div class="plate-spec-row"><span>Processing Latency:</span> <strong>Sub-10ms CameraX stream decode</strong></div>
+              <div class="plate-spec-row"><span>Cloud Server Calls:</span> <strong>0 (100% On-Device)</strong></div>
+            </div>
+          </div>
+          <div class="plate-actions">
+            <a href="./omniscan/" class="btn-plate">Privacy Policy</a>
+            <a href="https://play.google.com/store/apps/details?id=com.omniscan.qr.barcode" target="_blank" rel="noopener" class="btn-plate btn-play">Google Play</a>
+          </div>
+        </div>
+
+        <!-- Plate II: ClapGuard -->
+        <div class="folio-plate" data-folio-cat="audio">
+          <div>
+            <div class="plate-image-frame">
+              <img src="./assets/images/clapguard_feature.png" alt="ClapGuard Feature Graphic">
+              <span class="plate-number-badge">PLATE II · ACOUSTIC AI</span>
+              <div class="plate-icon-corner">
+                <img src="./assets/images/clapguard_icon.png" alt="ClapGuard Icon">
+              </div>
+            </div>
+            <span class="plate-category">Acoustic Signal Processing · Security</span>
+            <h3 class="plate-title">ClapGuard: Phone Acoustic Finder</h3>
+            <p class="plate-desc">
+              Low-power acoustic neural detection service that locates misplaced devices by audio impulse. Features motion tamper protection, flashlight stroboscopic alert sequences, and RAM-only audio buffers.
+            </p>
+            <div class="plate-specs-list">
+              <div class="plate-spec-row"><span>Acoustic Pipeline:</span> <strong>Ephemeral RAM Ring Buffer</strong></div>
+              <div class="plate-spec-row"><span>Sensor Integration:</span> <strong>Hardware Gyroscope &amp; Accelerometer</strong></div>
+              <div class="plate-spec-row"><span>Audio Disk Writes:</span> <strong>0 Bytes (Zero Persistence)</strong></div>
+            </div>
+          </div>
+          <div class="plate-actions">
+            <a href="./clapguard/" class="btn-plate">Privacy Policy</a>
+            <a href="https://play.google.com/store/apps/details?id=com.soundguard.findphone.clap" target="_blank" rel="noopener" class="btn-plate btn-play">Google Play</a>
+          </div>
+        </div>
+
+        <!-- Plate III: Zenith Focus Launcher -->
+        <div class="folio-plate" data-folio-cat="os">
+          <div>
+            <div class="plate-image-frame" style="background:#17120e; display:flex; align-items:center; justify-content:center;">
+              <img src="./assets/images/zenith_icon.png" alt="Zenith Launcher Icon" style="width:130px; height:130px; object-fit:contain; border-radius:20px; box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+              <span class="plate-number-badge">PLATE III · MINIMAL OS</span>
+            </div>
+            <span class="plate-category">Digital Wellbeing &amp; Custom Interface</span>
+            <h3 class="plate-title">Zenith Focus Launcher</h3>
+            <p class="plate-desc">
+              A radical departure from addictive algorithmic home screens. Strips away notifications in favor of pure typographic serenity, cognitive usage budgets, and localized scratchpad notes.
+            </p>
+            <div class="plate-specs-list">
+              <div class="plate-spec-row"><span>Interface Toolkit:</span> <strong>Jetpack Compose Declarative UI</strong></div>
+              <div class="plate-spec-row"><span>Telemetry Footprint:</span> <strong>Zero Analytic SDKs</strong></div>
+              <div class="plate-spec-row"><span>State Engine:</span> <strong>Kotlin Coroutines &amp; Flow</strong></div>
+            </div>
+          </div>
+          <div class="plate-actions">
+            <a href="mailto:databydevang@gmail.com?subject=Zenith%20Focus%20Launcher%20Inquiry" class="btn-plate">Request Access</a>
+            <a href="mailto:databydevang@gmail.com" class="btn-plate btn-play">Developer Dispatch</a>
+          </div>
+        </div>
+
+        <!-- Plate IV: KineticFit Pro -->
+        <div class="folio-plate" data-folio-cat="utility">
+          <div>
+            <div class="plate-image-frame" style="background:#201610; display:flex; align-items:center; justify-content:center;">
+              <img src="./assets/images/kineticfit_icon.png" alt="KineticFit Pro Icon" style="width:130px; height:130px; object-fit:contain; border-radius:20px; box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+              <span class="plate-number-badge">PLATE IV · HEALTH UTILITY</span>
+            </div>
+            <span class="plate-category">Offline Health Architecture</span>
+            <h3 class="plate-title">KineticFit Pro: Home Workout</h3>
+            <p class="plate-desc">
+              Distance-optimized calisthenics training coach with 79 animated bodyweight routines, 30-day progressive shred programs, and local SQLite metrics. Zero recurring subscriptions.
+            </p>
+            <div class="plate-specs-list">
+              <div class="plate-spec-row"><span>Database Storage:</span> <strong>100% Offline SQLite / Room</strong></div>
+              <div class="plate-spec-row"><span>Routine Catalog:</span> <strong>79 Animated Vector Routines</strong></div>
+              <div class="plate-spec-row"><span>Subscription Model:</span> <strong>Zero Recurring Fees</strong></div>
+            </div>
+          </div>
+          <div class="plate-actions">
+            <a href="./kineticfit/" class="btn-plate">Privacy Policy</a>
+            <a href="https://play.google.com/store/apps/details?id=com.kineticfit.homeworkout.pro" target="_blank" rel="noopener" class="btn-plate btn-play">Google Play</a>
+          </div>
+        </div>
+
+        <!-- Plate V: InvoicePro -->
+        <div class="folio-plate" data-folio-cat="utility">
+          <div>
+            <div class="plate-image-frame" style="background:#1b1510; display:flex; align-items:center; justify-content:center;">
+              <img src="./assets/images/invoicepro_icon.png" alt="InvoicePro Icon" style="width:130px; height:130px; object-fit:contain; border-radius:20px; box-shadow:0 8px 24px rgba(0,0,0,0.6);">
+              <span class="plate-number-badge">PLATE V · LEDGER UTILITY</span>
+            </div>
+            <span class="plate-category">Business Documents &amp; Invoicing</span>
+            <h3 class="plate-title">InvoicePro</h3>
+            <p class="plate-desc">
+              Fast, offline-first invoice and estimate creator. Create professional PDF receipts, manage client directories, track tax rates, and capture digital signatures locally on your device.
+            </p>
+            <div class="plate-specs-list">
+              <div class="plate-spec-row"><span>Document Engine:</span> <strong>On-Device PDF Generator</strong></div>
+              <div class="plate-spec-row"><span>Client Privacy:</span> <strong>Zero Cloud Records Storage</strong></div>
+              <div class="plate-spec-row"><span>Signatures:</span> <strong>Local Vector Signature Capture</strong></div>
+            </div>
+          </div>
+          <div class="plate-actions">
+            <a href="./invoicepro/" class="btn-plate">Privacy Policy</a>
+            <a href="https://play.google.com/store/apps/details?id=com.invoicepro.invoice_pro_app" target="_blank" rel="noopener" class="btn-plate btn-play">Google Play</a>
+          </div>
+        </div>
+
       </div>
     </section>
+
+    <!-- Engineering Creed -->
+    <section id="creed" class="section-creed">
+      <div class="creed-columns">
+        <div class="creed-item">
+          <span class="creed-roman">I. The Device as Fortress</span>
+          <h3>On-Device Compute</h3>
+          <p>We reject the modern assumption that every user touch must be beamed to remote telemetry collectors. Our apps perform computation on the processor you bought.</p>
+        </div>
+        <div class="creed-item">
+          <span class="creed-roman">II. Ephemeral RAM Integrity</span>
+          <h3>Zero Acoustic Disk Writes</h3>
+          <p>Sensor inputs like microphones and gyroscopes operate strictly within volatile RAM ring-buffers. No raw voice or motion data is ever persisted to non-volatile flash storage.</p>
+        </div>
+        <div class="creed-item">
+          <span class="creed-roman">III. Standardized Compliance</span>
+          <h3>Verified App-Ads Rigor</h3>
+          <p>Legal policies and IAB <code>app-ads.txt</code> publisher verification declarations are kept unencumbered, public, and strictly compliant with Google Play governance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Direct Dispatch -->
+    <section id="dispatch" class="section-dispatch">
+      <div class="dispatch-card">
+        <div class="dispatch-info">
+          <h3>Direct Engineering Dispatch</h3>
+          <p>For technical inquiries, source disclosures, licensing, or Google Play governance.</p>
+        </div>
+        <a href="mailto:databydevang@gmail.com" class="btn-archival-primary">Dispatch Inquiry &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Archival Footer -->
+    <footer class="archival-footer">
+      <div class="footer-links-wrap">
+        <a href="./omniscan/">OmniScan Policy</a>
+        <span>&middot;</span>
+        <a href="./clapguard/">ClapGuard Policy</a>
+        <span>&middot;</span>
+        <a href="./kineticfit/">KineticFit Policy</a>
+        <span>&middot;</span>
+        <a href="./invoicepro/">InvoicePro Policy</a>
+        <span>&middot;</span>
+        <a href="./app-ads.txt">app-ads.txt</a>
+        <span>&middot;</span>
+        <a href="mailto:databydevang@gmail.com">Founder Support</a>
+        <span>&middot;</span>
+        <a href="https://github.com/devang7072" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p>&copy; MMXXVI Devang Bhumbhaliya Babubhai · Hand-Bound Archival Monograph · All Rights Reserved.</p>
+    </footer>
+
   </div>
 
-  <!-- Minimal Footer -->
-  <footer>
-    <div class="footer-links">
-      <a href="mailto:devangrabari7072@gmail.com">Support</a>
-      <span>&middot;</span>
-      <a href="./app-ads.txt">app-ads.txt</a>
-      <span>&middot;</span>
-      <a href="https://github.com/devang7072" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <p>&copy; 2026 Devang Bhumbhaliya. All rights reserved.</p>
-  </footer>
+  <script>
+    function filterFolio(cat) {
+      document.querySelectorAll('.folio-tab').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      const plates = document.querySelectorAll('.folio-plate');
+      plates.forEach(p => {
+        if (cat === 'all' || p.getAttribute('data-folio-cat') === cat) {
+          p.style.display = 'flex';
+        } else {
+          p.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
