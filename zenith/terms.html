@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Zenith: Minimalist Launcher</title>
+  <meta name="description" content="Official Terms of Service and End User License Agreement for Zenith: Minimalist Launcher by Devang Bhumbhaliya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --surface: #0a0a0a;
+      --surface-elevated: #121212;
+      --border: #222222;
+      --border-accent: #333333;
+      --text-main: #ffffff;
+      --text-muted: #888888;
+      --text-dim: #555555;
+      --accent-amber: #ffd180;
+      --accent-emerald: #10b981;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 56px 24px 64px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* Back Navigation */
+    .back-nav {
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .back-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .back-nav a:hover {
+      color: var(--text-main);
+    }
+
+    /* App Header Banner */
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .app-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      object-fit: cover;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-meta h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .app-badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .badge-amber {
+      color: var(--accent-amber);
+      border-color: rgba(255, 209, 128, 0.25);
+      background: rgba(255, 209, 128, 0.05);
+    }
+
+    .badge-emerald {
+      color: var(--accent-emerald);
+      border-color: rgba(16, 185, 129, 0.25);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    /* Content Typography */
+    .content h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 36px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .content h2 span {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    .content p {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .content ul {
+      margin-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .content li {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .content strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .highlight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .highlight-card p {
+      margin-bottom: 0;
+      color: #e5e5e5;
+      font-size: 14px;
+    }
+
+    .highlight-card strong {
+      color: var(--accent-amber);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-top: 48px;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Back Link & Privacy Policy Navigation -->
+    <div class="back-nav">
+      <a href="../">&larr; Developer Registry</a>
+      <span style="color: var(--border);">&bull;</span>
+      <a href="./index.html">Privacy Policy &rarr;</a>
+    </div>
+
+    <!-- App Header -->
+    <header class="app-header">
+      <img src="icon.png" alt="Zenith App Icon" class="app-icon">
+      <div class="app-meta">
+        <h1>Terms of Service</h1>
+        <div class="app-badges">
+          <span class="badge badge-amber">Zenith: Minimalist Launcher</span>
+          <span class="badge">com.zenithfocus.launcher</span>
+          <span class="badge badge-emerald">Free &amp; Open Utility</span>
+          <span class="badge">Last Updated: Nov 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Terms Content -->
+    <div class="content">
+      <div class="highlight-card">
+        <p><strong>Summary:</strong> By downloading, installing, or using <strong>Zenith: Minimalist Launcher</strong>, you agree to these Terms of Service. Zenith is a free, local-first Scandinavian Android launcher built to promote digital wellbeing with zero forced paywalls or telemetry.</p>
+      </div>
+
+      <h2><span>01</span> Acceptance of Terms</h2>
+      <p>These Terms of Service ("Terms") govern your access to and use of <strong>Zenith: Minimalist Launcher</strong> ("Application", "App", "we", "us", or "our"), developed by <strong>Devang Bhumbhaliya</strong> ("Developer"). By downloading, installing, accessing, or using the Application from the Google Play Store or any authorized channel, you acknowledge that you have read, understood, and agreed to be bound by these Terms.</p>
+      <p>If you do not agree to these Terms, please do not install or use the Application, and uninstall it immediately.</p>
+
+      <h2><span>02</span> Grant of License</h2>
+      <p>Subject to your compliance with these Terms, the Developer grants you a limited, non-exclusive, non-transferable, revocable license to download, install, and use the Application on any compatible Android device that you own or control, solely for your personal, non-commercial use.</p>
+      <p>You agree that you will not:</p>
+      <ul>
+        <li>Decompile, reverse engineer, disassemble, or attempt to derive the source code of the binary builds for malicious distribution;</li>
+        <li>Rent, lease, lend, sell, redistribute, or sublicense the Application without express written permission;</li>
+        <li>Use the Application for any unlawful, fraudulent, or harmful purpose.</li>
+      </ul>
+
+      <h2><span>03</span> Local-First Architecture &amp; User Content</h2>
+      <p>Zenith is architected as an offline-first utility. All notes created in the Quick Notes scratchpad, custom clock configurations, pinned favorite apps, and hidden application lockers are stored strictly in local SQLite and Preferences DataStore on your device.</p>
+      <p>You are solely responsible for maintaining backups of your device data. The Developer does not operate cloud backup servers for user notes and cannot restore locally deleted data.</p>
+
+      <h2><span>04</span> Voluntary Developer Support &amp; Advertising</h2>
+      <p>Zenith contains no mandatory paywalls, subscriptions, or intrusive popup/interstitial ads during your regular home screen navigation:</p>
+      <ul>
+        <li><strong>Voluntary Support:</strong> The Application includes an optional "Watch an Ad to Support" button powered by the Google Mobile Ads (AdMob) SDK. Initiating an ad is completely voluntary.</li>
+        <li><strong>Third-Party Ad Content:</strong> Advertisements delivered through the Google Mobile Ads SDK are served by Google and its advertising partners. The Developer does not endorse or assume responsibility for any third-party products or services featured in ads.</li>
+      </ul>
+
+      <h2><span>05</span> System Permissions &amp; Homescreen Operations</h2>
+      <p>Zenith functions as an alternative Android home screen. To deliver this functionality, the Application interacts with Android system services:</p>
+      <ul>
+        <li><strong>App Drawer:</strong> The Application queries launchable applications using Android's standard package visibility declarations to display and launch installed apps.</li>
+        <li><strong>Biometric Security:</strong> The hidden apps vault utilizes Android's hardware-backed BiometricPrompt API (fingerprint, face unlock, or device PIN). Biometric authentication is handled strictly by your device operating system; Zenith never accesses or stores raw biometric credentials.</li>
+        <li><strong>Status Bar:</strong> The swipe-down gesture calls Android's status bar expansion service for one-handed accessibility.</li>
+      </ul>
+
+      <h2><span>06</span> Intellectual Property Rights</h2>
+      <p>The Application, including its Scandinavian typography clock designs, Nordic OLED color palettes, layout architecture, branding, vector drawables, logos, and custom graphics, is the intellectual property of Devang Bhumbhaliya and is protected by applicable copyright and intellectual property laws.</p>
+
+      <h2><span>07</span> Disclaimer of Warranties</h2>
+      <p>THE APPLICATION IS PROVIDED ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMISSIBLE UNDER APPLICABLE LAW, THE DEVELOPER DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, COMPATIBILITY WITH ALL ANDROID OEM SKINS (SUCH AS ONEUI, MIUI, COLOROS, OXYGENOS), AND NON-INFRINGEMENT.</p>
+      <p>While Zenith is rigorously tested across modern Android versions (Android 8.0 through Android 16), the Developer does not warrant that the Application will operate completely error-free or uninterrupted on every customized device firmware.</p>
+
+      <h2><span>08</span> Limitation of Liability</h2>
+      <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE DEVELOPER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF DATA, DEVICE USE, OR OTHER INTANGIBLE LOSSES RESULTING FROM YOUR USE OF OR INABILITY TO USE THE APPLICATION.</p>
+
+      <h2><span>09</span> Termination</h2>
+      <p>These Terms remain in effect until terminated by either you or the Developer. You may terminate these Terms at any time by uninstalling the Application and deleting all local data. The Developer reserves the right to discontinue or modify the Application at any time.</p>
+
+      <h2><span>10</span> Consumer Rights (EEA, UK, and Global Users)</h2>
+      <p>If you are a consumer residing in the European Economic Area (EEA), United Kingdom (UK), or other jurisdictions with statutory consumer protections, nothing in these Terms shall limit or exclude any mandatory legal rights that cannot be waived by contract under applicable law.</p>
+
+      <h2><span>11</span> Governing Law &amp; Contact Information</h2>
+      <p>These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.</p>
+      <p>For questions, support, or legal inquiries regarding these Terms of Service, please contact the developer:</p>
+      <div class="highlight-card">
+        <p><strong>Developer:</strong> Devang Bhumbhaliya<br>
+        <strong>Email:</strong> <a href="mailto:devangrabari7072@gmail.com" style="color: var(--accent-amber); text-decoration: none;">devangrabari7072@gmail.com</a><br>
+        <strong>Developer Portal:</strong> <a href="https://devang7072.github.io/" style="color: var(--text-muted); text-decoration: none;">https://devang7072.github.io/</a><br>
+        <strong>Privacy Policy:</strong> <a href="https://devang7072.github.io/zenith/" style="color: var(--accent-amber); text-decoration: none;">https://devang7072.github.io/zenith/</a></p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Devang Bhumbhaliya &bull; Zenith: Minimalist Launcher &bull; <a href="./index.html">Privacy Policy</a> &bull; <a href="../">Developer Portal</a></p>
+    </footer>
+  </div>
+</body>
+</html>
