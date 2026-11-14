@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - SpellMaster Pro</title>
+  <style>
+    :root {
+      --primary: #09245F;
+      --primary-dark: #051433;
+      --accent: #FFC900;
+      --text: #10295F;
+      --text-muted: #536b9e;
+      --bg: #EEF2FF;
+      --card: #ffffff;
+      --border: #DDE5F8;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+      color: var(--text);
+      background-color: var(--bg);
+      margin: 0;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card);
+      padding: 44px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(9, 36, 95, 0.08);
+    }
+    .back-nav {
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    .back-nav a:hover {
+      color: #174A9C;
+      text-decoration: underline;
+    }
+    .app-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+    }
+    .app-header img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(9, 36, 95, 0.15);
+      border: 2px solid #ffffff;
+    }
+    h1 {
+      color: var(--primary);
+      font-size: 26px;
+      margin: 0;
+      font-weight: 700;
+    }
+    .meta-date {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    h2 {
+      color: var(--primary);
+      font-size: 18px;
+      margin-top: 32px;
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      font-weight: 700;
+    }
+    p, li {
+      font-size: 15px;
+      color: #334e7a;
+    }
+    ul {
+      padding-left: 22px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .highlight-box {
+      background: #F4F7FF;
+      border-left: 4px solid var(--accent);
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin: 24px 0;
+    }
+    .highlight-box p {
+      margin: 0;
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 14.5px;
+    }
+    .badge-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: #09245F;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-top: 6px;
+    }
+    code {
+      background: #edf2fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      color: var(--primary);
+      font-family: monospace;
+    }
+    footer {
+      margin-top: 44px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-nav">
+      <a href="../">&larr; Back to Developer Apps Hub</a>
+      <a href="terms.html">Terms of Service &rarr;</a>
+    </div>
+
+    <div class="app-header">
+      <img src="../assets/images/spellmaster_icon.png" alt="SpellMaster Pro Logo">
+      <div>
+        <h1>Privacy Policy for SpellMaster Pro</h1>
+        <div class="meta-date">Application ID: <code>com.devang.spellmaster.pro</code> &bull; Effective Date: November 14, 2026</div>
+        <span class="badge-pill">100% On-Device Architecture</span>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <p><strong>Executive Summary:</strong> SpellMaster Pro is engineered as a privacy-first educational tool. With an embedded offline lexicon of 180,000+ words, on-device speech synthesis, and zero telemetry SDKs, your input, queries, voice, and translations are strictly private. We do not track, log, profile, transmit, or monetize your personal information.</p>
+    </div>
+
+    <h2>1. Zero Tracking & No Data Harvesting</h2>
+    <ul>
+      <li><strong>No Personal Identifiers:</strong> SpellMaster Pro does not collect, log, transmit, or store your name, email, phone number, device IMEI, Android ID, Advertising ID (GAID), or GPS location.</li>
+      <li><strong>No Keystroke Logging:</strong> All typed queries, spell checks, and dictionary lookups are processed strictly in volatile device memory and discarded immediately after use.</li>
+      <li><strong>Zero Advertising & Analytics SDKs:</strong> The application contains <strong>zero third-party ad networks</strong> (no AdMob, AppLovin, Unity) and <strong>zero analytics SDKs</strong> (no Firebase Analytics, Adjust, AppsFlyer, or Facebook SDK).</li>
+    </ul>
+
+    <h2>2. 100% On-Device Local Processing</h2>
+    <ul>
+      <li><strong>Offline Frequency Lexicon:</strong> The core spell checker relies on a local database (<code>suggestion_database.sqlite</code>) embedded directly inside the application bundle. Typo detection, candidate generation, and Levenshtein distance calculations run 100% locally on your device CPU with zero internet dependency.</li>
+      <li><strong>Pronunciation Audio Studio:</strong> Audio pronunciation is powered by Android's native on-device <code>TextToSpeech</code> engine. Speech rate, pitch, and accent synthesis execute locally on hardware without recording or uploading audio.</li>
+    </ul>
+
+    <h2>3. Optional User-Initiated Network Services</h2>
+    <p>Extended features utilize public educational endpoints only when explicitly requested by the user:</p>
+    <ul>
+      <li><strong>Smart English Dictionary:</strong> Online word definitions, synonyms, and phonetic etymologies query public educational endpoints (such as <code>api.dictionaryapi.dev</code> and <code>api.datamuse.com</code>). No user tokens, tracking cookies, or device IDs are attached to these requests. When disconnected, the app seamlessly serves definitions from its local offline vocabulary store.</li>
+      <li><strong>Speak & Translate:</strong> User-initiated translation requests are transmitted securely via encrypted HTTPS directly to translation service endpoints. We do not store, log, or profile your text on external servers.</li>
+    </ul>
+
+    <h2>4. Android Device Permissions (Zero Sensitive Permissions)</h2>
+    <p>SpellMaster Pro adheres to the principle of least privilege and requires <strong>zero dangerous or sensitive permissions</strong>:</p>
+    <ul>
+      <li><code>android.permission.INTERNET</code>: Used solely to fetch dictionary definitions and language translations upon explicit user request.</li>
+      <li><code>android.permission.ACCESS_NETWORK_STATE</code>: Used to verify network availability before attempting online lookups, enabling instant offline fallback.</li>
+      <li><code>android.permission.VIBRATE</code>: Provides tactile haptic feedback during interactive controls.</li>
+      <li><strong>Microphone Governance:</strong> Voice input is delegated entirely to Android's native system speech recognizer dialog (<code>RecognizerIntent.ACTION_RECOGNIZE_SPEECH</code>). SpellMaster Pro does not record, access, or store microphone hardware streams, and does not declare or require <code>android.permission.RECORD_AUDIO</code>.</li>
+    </ul>
+
+    <h2>5. Children's Privacy (COPPA Compliance)</h2>
+    <p>SpellMaster Pro is designed for learners, students, and professionals of all ages, including children under the age of 13. The application does not collect personal data from any user, contains no behavioral profiling, and displays no external advertisements or tracking links.</p>
+
+    <h2>6. Google Play Data Safety Declaration Summary</h2>
+    <ul>
+      <li><strong>Data Collection:</strong> No user data is collected.</li>
+      <li><strong>Data Sharing:</strong> No user data is shared with third parties.</li>
+      <li><strong>Security Practices:</strong> All optional network lookups use industry-standard encrypted HTTPS.</li>
+      <li><strong>Data Retention & Deletion:</strong> No data is retained on external servers. All local caches can be wiped instantly by the user via standard Android Application Settings.</li>
+    </ul>
+
+    <h2>7. Security Safeguards</h2>
+    <p>All on-device computation takes place within Android's sandboxed application execution environment. Application binaries are signed with Google Play App Signing and protected by ProGuard obfuscation rules to prevent tampering and ensure code integrity.</p>
+
+    <h2>8. Policy Updates</h2>
+    <p>We may update this Privacy Policy periodically to reflect app enhancements or regulatory requirements. Any modifications will be posted to this official URL with a revised effective date.</p>
+
+    <h2>9. Developer & Support Contact</h2>
+    <p>For questions, feedback, or governance inquiries regarding SpellMaster Pro, please contact:</p>
+    <p>
+      <strong>Developer:</strong> Devang Bhumbhaliya Babubhai<br>
+      <strong>Email:</strong> <a href="mailto:devangrabari7072@gmail.com" style="color:var(--primary); font-weight:600;">devangrabari7072@gmail.com</a><br>
+      <strong>Official Developer Portal:</strong> <a href="https://devang7072.github.io/" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">https://devang7072.github.io/</a>
+    </p>
+
+    <footer>
+      &copy; 2026 SpellMaster Pro. All rights reserved. &bull;
+      <a href="terms.html">Terms of Service</a> &bull;
+      <a href="../">Developer Apps Hub</a>
+    </footer>
+  </div>
+</body>
+</html>
