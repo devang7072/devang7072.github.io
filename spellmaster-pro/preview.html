@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpellMaster Pro - Material 3 Expressive Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- React & Babel Standalone -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    :root {
+      /* M3 Expressive Theme Tokens - Sovereign Navy & Energetic Amber */
+      --md-sys-color-primary: #0A2558;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #DDE5F8;
+      --md-sys-color-on-primary-container: #001849;
+      
+      --md-sys-color-secondary: #FFB800;
+      --md-sys-color-on-secondary: #241A00;
+      --md-sys-color-secondary-container: #FFF0B3;
+      --md-sys-color-on-secondary-container: #281B00;
+      
+      --md-sys-color-tertiary: #1B6554;
+      --md-sys-color-tertiary-container: #A4F2DC;
+      
+      --md-sys-color-surface: #FAF9FE;
+      --md-sys-color-surface-container-low: #F3F3FA;
+      --md-sys-color-surface-container: #EDEEF5;
+      --md-sys-color-surface-container-high: #E7E8F0;
+      --md-sys-color-surface-container-highest: #E1E2EA;
+      --md-sys-color-on-surface: #191C21;
+      --md-sys-color-on-surface-variant: #434752;
+      --md-sys-color-outline: #737784;
+      --md-sys-color-outline-variant: #C4C6D4;
+      
+      --md-sys-color-error: #BA1A1A;
+      --md-sys-color-error-container: #FFDAD6;
+      
+      /* M3 Expressive Spring Easing */
+      --m3-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --m3-standard: cubic-bezier(0.2, 0, 0, 1);
+      
+      /* Canvas & Typography */
+      --font-display: 'Outfit', -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: #0B1120;
+      color: #E2E8F0;
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    /* Spring animations */
+    .spring-press {
+      transition: transform 0.2s var(--m3-spring), box-shadow 0.2s ease;
+    }
+    .spring-press:hover {
+      transform: translateY(-2px);
+    }
+    .spring-press:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    @keyframes soundwaveAnim {
+      0%, 100% { height: 6px; }
+      50% { height: 26px; }
+    }
+
+    .wave-bar {
+      width: 4px;
+      background: var(--md-sys-color-primary);
+      border-radius: 4px;
+      animation: soundwaveAnim 1.2s ease-in-out infinite;
+    }
+
+    /* Range slider custom styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 14px;
+      cursor: pointer;
+      background: #DDE5F8;
+      border-radius: 10px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      height: 24px;
+      width: 10px;
+      border-radius: 6px;
+      background: #0A2558;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      transition: transform 0.15s var(--m3-spring);
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: #FFB800;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Android Pixel 8 Frame Component ---
+    function AndroidFrame({ children, time = '9:41', battery = 98, screenTitle = '' }) {
+      return (
+        <div style={{
+          display: 'inline-flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 12
+        }}>
+          <div style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: '#94A3B8',
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6
+          }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#FFC900' }}></span>
+            {screenTitle}
+          </div>
+
+          <div style={{
+            position: 'relative',
+            width: 380,
+            height: 790,
+            background: '#121826',
+            borderRadius: 48,
+            padding: 12,
+            boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(255, 255, 255, 0.08)',
+            border: '4px solid #1E293B',
+            overflow: 'hidden'
+          }}>
+            {/* Screen Glass */}
+            <div style={{
+              width: '100%',
+              height: '100%',
+              background: 'var(--md-sys-color-surface)',
+              borderRadius: 38,
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              {/* Android Status Bar */}
+              <div style={{
+                height: 38,
+                padding: '0 24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                color: 'var(--md-sys-color-on-surface)',
+                fontFamily: 'var(--font-body)',
+                fontSize: 13,
+                fontWeight: 700,
+                zIndex: 40,
+                position: 'relative',
+                background: 'transparent'
+              }}>
+                <span>{time}</span>
+                {/* Punch Hole Camera */}
+                <div style={{
+                  position: 'absolute',
+                  left: '50%',
+                  top: 10,
+                  transform: 'translateX(-50%)',
+                  width: 14,
+                  height: 14,
+                  borderRadius: '50%',
+                  background: '#050811',
+                  boxShadow: 'inset 0 0 2px rgba(255,255,255,0.2)'
+                }} />
+                {/* Status Icons */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <svg width="14" height="12" viewBox="0 0 16 12" fill="currentColor">
+                    <path d="M1 9h2v3H1V9zm4-3h2v6H5V6zm4-3h2v9H9V3zm4-3h2v12h-2V0z"/>
+                  </svg>
+                  <svg width="14" height="12" viewBox="0 0 16 12" fill="currentColor">
+                    <path d="M8 2C4.5 2 1.5 3.5 0 5.5l8 6.5 8-6.5C14.5 3.5 11.5 2 8 2z"/>
+                  </svg>
+                  <div style={{
+                    width: 20,
+                    height: 11,
+                    border: '1.5px solid currentColor',
+                    borderRadius: 3,
+                    padding: 1,
+                    display: 'flex',
+                    alignItems: 'center'
+                  }}>
+                    <div style={{ width: `${battery}%`, height: '100%', background: 'currentColor', borderRadius: 1.5 }} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Scrollable Screen Content */}
+              <div style={{
+                flex: 1,
+                overflowY: 'auto',
+                overflowX: 'hidden',
+                position: 'relative',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                {children}
+              </div>
+
+              {/* Android Gesture Bar */}
+              <div style={{
+                height: 20,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'var(--md-sys-color-surface-container-highest)',
+                zIndex: 40
+              }}>
+                <div style={{
+                  width: 72,
+                  height: 4,
+                  borderRadius: 999,
+                  background: 'var(--md-sys-color-on-surface-variant)',
+                  opacity: 0.5
+                }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- M3 Expressive Bottom Navigation Bar ---
+    function M3BottomNav({ currentTab, onTabSelect }) {
+      const tabs = [
+        { id: 'spell', label: 'Spell Check', icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' },
+        { id: 'pronounce', label: 'Pronounce', icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z' },
+        { id: 'dictionary', label: 'Dictionary', icon: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z' },
+        { id: 'translate', label: 'Translate', icon: 'M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04z' },
+        { id: 'ai', label: 'AI Polish', icon: 'M7.5 5.6L10 0l2.5 5.6L18 8l-5.5 2.4L10 16l-2.5-5.6L2 8l5.5-2.4zm12 11.4l1.5-3.4 1.5 3.4 3.5 1.5-3.5 1.5-1.5 3.4-1.5-3.4-3.5-1.5 3.5-1.5z' }
+      ];
+
+      return (
+        <div style={{
+          background: 'var(--md-sys-color-surface-container)',
+          borderTop: '1px solid var(--md-sys-color-surface-container-high)',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          padding: '8px 12px 10px',
+          position: 'sticky',
+          bottom: 0,
+          zIndex: 30
+        }}>
+          {tabs.map((tab) => {
+            const isSelected = currentTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onTabSelect(tab.id)}
+                className="spring-press"
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: 4,
+                  cursor: 'pointer',
+                  flex: 1,
+                  padding: '2px 0'
+                }}
+              >
+                {/* M3 Active Indicator Pill */}
+                <div style={{
+                  width: isSelected ? 52 : 36,
+                  height: 28,
+                  borderRadius: 16,
+                  background: isSelected ? 'var(--md-sys-color-secondary)' : 'transparent',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.25s var(--m3-spring)'
+                }}>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill={isSelected ? '#121212' : 'var(--md-sys-color-on-surface-variant)'}
+                  >
+                    <path d={tab.icon} />
+                  </svg>
+                </div>
+                <span style={{
+                  fontSize: 10,
+                  fontWeight: isSelected ? 800 : 600,
+                  color: isSelected ? 'var(--md-sys-color-primary)' : 'var(--md-sys-color-on-surface-variant)',
+                  fontFamily: 'var(--font-body)',
+                  transition: 'color 0.2s ease'
+                }}>
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // --- SCREEN 1: Spell Checker Studio ---
+    function SpellCheckerScreen({ onNavigate }) {
+      const [text, setText] = useState("I am definately recieving your messge about the mischevous colonele.");
+      const [selectedIssue, setSelectedIssue] = useState(null);
+      const [appliedFixes, setAppliedFixes] = useState([]);
+      const [copied, setCopied] = useState(false);
+
+      const typoMap = {
+        definately: { replacement: "definitely", suggestions: ["definitely", "defiantly"], count: 184000 },
+        recieving: { replacement: "receiving", suggestions: ["receiving", "receding"], count: 92000 },
+        messge: { replacement: "message", suggestions: ["message", "massage"], count: 420000 },
+        mischevous: { replacement: "mischievous", suggestions: ["mischievous", "miscellaneous"], count: 65000 },
+        colonele: { replacement: "colonel", suggestions: ["colonel", "colorless"], count: 110000 }
+      };
+
+      const handleReplace = (word, fix) => {
+        const regex = new RegExp(`\\b${word}\\b`, 'gi');
+        setText(text.replace(regex, fix));
+        setAppliedFixes([...appliedFixes, word]);
+        setSelectedIssue(null);
+      };
+
+      const handleFixAll = () => {
+        let fixed = text;
+        Object.keys(typoMap).forEach(typo => {
+          fixed = fixed.replace(new RegExp(`\\b${typo}\\b`, 'gi'), typoMap[typo].replacement);
+        });
+        setText(fixed);
+        setAppliedFixes(Object.keys(typoMap));
+        setSelectedIssue(null);
+      };
+
+      return (
+        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* Top Bar Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 38,
+                height: 38,
+                borderRadius: 14,
+                background: 'var(--md-sys-color-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFC900',
+                fontWeight: 900,
+                fontSize: 18,
+                boxShadow: '0 4px 12px rgba(10, 37, 88, 0.25)'
+              }}>
+                Aa
+              </div>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  Spell Checker
+                </h2>
+                <span style={{ fontSize: 11, color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>
+                  180,000+ Words Offline SQLite
+                </span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => { setText(""); setAppliedFixes([]); }}
+              className="spring-press"
+              style={{
+                background: 'var(--md-sys-color-surface-container-high)',
+                border: 'none',
+                padding: '6px 12px',
+                borderRadius: 999,
+                fontSize: 11,
+                fontWeight: 700,
+                color: 'var(--md-sys-color-on-surface)',
+                cursor: 'pointer'
+              }}
+            >
+              Clear
+            </button>
+          </div>
+
+          {/* M3 Expressive Card: Input Textarea with interactive error highlights */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-lowest, #FFFFFF)',
+            borderRadius: 24,
+            padding: 16,
+            border: '2px solid var(--md-sys-color-surface-container-high)',
+            boxShadow: '0 8px 24px -8px rgba(10,37,88,0.06)'
+          }}>
+            <div style={{
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: 'var(--md-sys-color-on-surface)',
+              minHeight: 110,
+              fontFamily: 'var(--font-body)',
+              wordBreak: 'break-word'
+            }}>
+              {text.split(' ').map((word, i) => {
+                const cleanWord = word.replace(/[.,]/g, '').toLowerCase();
+                const isTypo = typoMap[cleanWord] && !appliedFixes.includes(cleanWord);
+                return (
+                  <span
+                    key={i}
+                    onClick={() => isTypo && setSelectedIssue(cleanWord)}
+                    style={{
+                      display: 'inline-block',
+                      marginRight: 5,
+                      cursor: isTypo ? 'pointer' : 'default',
+                      textDecoration: isTypo ? 'wavy underline' : 'none',
+                      textDecorationColor: isTypo ? 'var(--md-sys-color-error)' : 'transparent',
+                      background: isTypo ? 'var(--md-sys-color-error-container)' : 'transparent',
+                      color: isTypo ? 'var(--md-sys-color-error)' : 'inherit',
+                      padding: isTypo ? '1px 5px' : '0',
+                      borderRadius: isTypo ? 6 : 0,
+                      fontWeight: isTypo ? 700 : 400,
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    {word}
+                  </span>
+                );
+              })}
+            </div>
+
+            {/* Metrics Footer inside card */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingTop: 12,
+              marginTop: 12,
+              borderTop: '1px solid var(--md-sys-color-surface-container)'
+            }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--md-sys-color-outline)' }}>
+                {text.trim() ? text.trim().split(/\s+/).length : 0} Words &bull; {text.length} Chars
+              </span>
+
+              <div style={{ display: 'flex', gap: 6 }}>
+                <button
+                  onClick={() => {
+                    navigator.clipboard?.writeText(text);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 1500);
+                  }}
+                  className="spring-press"
+                  style={{
+                    background: 'var(--md-sys-color-surface-container)',
+                    border: 'none',
+                    padding: '6px 12px',
+                    borderRadius: 999,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: 'var(--md-sys-color-primary)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {copied ? '✓ Copied' : 'Copy'}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Action Chips & Fix All Hero Pill */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{
+              background: 'var(--md-sys-color-secondary-container)',
+              color: 'var(--md-sys-color-on-secondary-container)',
+              padding: '6px 14px',
+              borderRadius: 999,
+              fontSize: 12,
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6
+            }}>
+              <span>⚡</span>
+              <span>{Object.keys(typoMap).filter(k => !appliedFixes.includes(k)).length} Issues Detected</span>
+            </div>
+
+            <button
+              onClick={handleFixAll}
+              className="spring-press"
+              style={{
+                background: 'var(--md-sys-color-primary)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '9px 18px',
+                borderRadius: 999,
+                fontSize: 12,
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                boxShadow: '0 6px 18px rgba(10,37,88,0.25)'
+              }}
+            >
+              <span>1-Tap Fix All</span>
+              <span style={{ color: '#FFC900' }}>→</span>
+            </button>
+          </div>
+
+          {/* Selected Typo Resolution Bottom Card / Sheet */}
+          {selectedIssue && (
+            <div style={{
+              background: 'var(--md-sys-color-surface-container-high)',
+              borderRadius: 22,
+              padding: 16,
+              border: '2px solid var(--md-sys-color-secondary)',
+              animation: 'fadeIn 0.2s ease'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-error)', letterSpacing: '0.05em' }}>
+                  Typo: "{selectedIssue}"
+                </span>
+                <span style={{ fontSize: 10, color: 'var(--md-sys-color-outline)', fontWeight: 600 }}>
+                  Freq Rank: #{typoMap[selectedIssue]?.count.toLocaleString()}
+                </span>
+              </div>
+
+              <div style={{ fontSize: 12, color: 'var(--md-sys-color-on-surface-variant)', marginBottom: 10 }}>
+                Levenshtein Distance Candidates (Offline SQLite):
+              </div>
+
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                {typoMap[selectedIssue]?.suggestions.map((sug) => (
+                  <button
+                    key={sug}
+                    onClick={() => handleReplace(selectedIssue, sug)}
+                    className="spring-press"
+                    style={{
+                      background: 'var(--md-sys-color-primary)',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: 14,
+                      fontSize: 12,
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 4
+                    }}
+                  >
+                    <span>{sug}</span>
+                    <span style={{ color: '#FFC900', fontSize: 13 }}>✓</span>
+                  </button>
+                ))}
+                <button
+                  onClick={() => setSelectedIssue(null)}
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid var(--md-sys-color-outline-variant)',
+                    padding: '8px 12px',
+                    borderRadius: 14,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    color: 'var(--md-sys-color-on-surface)',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Ignore
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Educational Quick Presets */}
+          <div>
+            <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', letterSpacing: '0.05em' }}>
+              Sample Misspellings To Test:
+            </span>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
+              {[
+                "The mischevous colonele recieved his medal.",
+                "I am definately going to accommodate tomorrow.",
+                "Their seperation caused widespread embaresment."
+              ].map((s, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => { setText(s); setAppliedFixes([]); }}
+                  className="spring-press"
+                  style={{
+                    background: 'var(--md-sys-color-surface-container)',
+                    border: '1px solid var(--md-sys-color-surface-container-high)',
+                    padding: '6px 10px',
+                    borderRadius: 10,
+                    fontSize: 10,
+                    color: 'var(--md-sys-color-on-surface)',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    width: '100%'
+                  }}
+                >
+                  &bull; {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- SCREEN 2: Pronunciation Studio ---
+    function PronunciationScreen() {
+      const [word, setWord] = useState("Worcestershire");
+      const [accent, setAccent] = useState("UK");
+      const [rate, setRate] = useState(0.85);
+      const [pitch, setPitch] = useState(1.0);
+      const [isPlaying, setIsPlaying] = useState(false);
+
+      const presets = [
+        { word: "Worcestershire", ipa: "/ˈwʊs.tə.ʃər/", syllables: "WUSS-tuh-sheer", diff: "Expert" },
+        { word: "Anemone", ipa: "/əˈnem.ə.ni/", syllables: "uh-NEM-uh-nee", diff: "Tricky" },
+        { word: "Phenomenon", ipa: "/fəˈnɒm.ɪ.nən/", syllables: "fuh-NOM-uh-non", diff: "Medium" },
+        { word: "Colonel", ipa: "/ˈkɜː.nəl/", syllables: "KER-nuhl", diff: "Tricky" },
+        { word: "Queue", ipa: "/kjuː/", syllables: "KYOO", diff: "Easy" }
+      ];
+
+      const currentPreset = presets.find(p => p.word.toLowerCase() === word.toLowerCase()) || {
+        word,
+        ipa: "/ˈspɛl.mæs.tər/",
+        syllables: word.toUpperCase(),
+        diff: "Custom"
+      };
+
+      const handlePlay = () => {
+        setIsPlaying(true);
+        setTimeout(() => setIsPlaying(false), 2400);
+      };
+
+      return (
+        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 38,
+                height: 38,
+                borderRadius: 14,
+                background: 'var(--md-sys-color-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#0A2558',
+                fontWeight: 900,
+                fontSize: 18,
+                boxShadow: '0 4px 12px rgba(255, 184, 0, 0.3)'
+              }}>
+                🗣
+              </div>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  Pronunciation Studio
+                </h2>
+                <span style={{ fontSize: 11, color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>
+                  Multi-Accent Acoustic Synthesis
+                </span>
+              </div>
+            </div>
+            <span style={{
+              background: 'var(--md-sys-color-primary-container)',
+              color: 'var(--md-sys-color-on-primary-container)',
+              padding: '4px 10px',
+              borderRadius: 999,
+              fontSize: 11,
+              fontWeight: 800
+            }}>
+              Native TTS
+            </span>
+          </div>
+
+          {/* Accent Segmented Pill Selector */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container)',
+            borderRadius: 999,
+            padding: 4,
+            display: 'flex',
+            gap: 2
+          }}>
+            {["US", "UK", "CA", "AU", "IN"].map((acc) => (
+              <button
+                key={acc}
+                onClick={() => setAccent(acc)}
+                className="spring-press"
+                style={{
+                  flex: 1,
+                  padding: '7px 0',
+                  borderRadius: 999,
+                  border: 'none',
+                  background: accent === acc ? 'var(--md-sys-color-primary)' : 'transparent',
+                  color: accent === acc ? '#FFFFFF' : 'var(--md-sys-color-on-surface-variant)',
+                  fontWeight: accent === acc ? 800 : 600,
+                  fontSize: 11,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {acc}
+              </button>
+            ))}
+          </div>
+
+          {/* Hero Phonetic Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-lowest, #FFFFFF)',
+            borderRadius: 28,
+            padding: '24px 20px',
+            border: '2px solid var(--md-sys-color-surface-container-high)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center',
+            gap: 8,
+            boxShadow: '0 12px 30px -10px rgba(10,37,88,0.08)'
+          }}>
+            <span style={{
+              background: 'var(--md-sys-color-surface-container)',
+              color: 'var(--md-sys-color-primary)',
+              padding: '4px 12px',
+              borderRadius: 999,
+              fontSize: 10,
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em'
+            }}>
+              {currentPreset.diff} Complexity
+            </span>
+
+            <h1 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 28,
+              fontWeight: 900,
+              color: 'var(--md-sys-color-primary)',
+              letterSpacing: '-0.02em',
+              margin: '4px 0'
+            }}>
+              {currentPreset.word}
+            </h1>
+
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 14,
+              color: 'var(--md-sys-color-secondary)',
+              background: 'var(--md-sys-color-primary)',
+              padding: '4px 14px',
+              borderRadius: 12,
+              fontWeight: 700
+            }}>
+              {currentPreset.ipa}
+            </div>
+
+            <div style={{ fontSize: 13, color: 'var(--md-sys-color-outline)', fontWeight: 600, marginTop: 4 }}>
+              Syllables: <strong style={{ color: 'var(--md-sys-color-on-surface)' }}>{currentPreset.syllables}</strong>
+            </div>
+
+            {/* Soundwave Animation Graphic */}
+            <div style={{
+              height: 48,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 4,
+              margin: '8px 0'
+            }}>
+              {[...Array(16)].map((_, i) => (
+                <div
+                  key={i}
+                  className="wave-bar"
+                  style={{
+                    animationPlayState: isPlaying ? 'running' : 'paused',
+                    animationDelay: `${i * 0.08}s`,
+                    background: isPlaying ? 'var(--md-sys-color-secondary)' : 'var(--md-sys-color-surface-container-high)'
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Big Expressive Audio Trigger Button */}
+            <button
+              onClick={handlePlay}
+              className="spring-press"
+              style={{
+                width: '100%',
+                padding: '14px 20px',
+                borderRadius: 999,
+                background: isPlaying ? 'var(--md-sys-color-secondary)' : 'var(--md-sys-color-primary)',
+                color: isPlaying ? '#0A2558' : '#FFFFFF',
+                border: 'none',
+                fontWeight: 800,
+                fontSize: 14,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                boxShadow: isPlaying
+                  ? '0 8px 24px rgba(255,184,0,0.4)'
+                  : '0 8px 24px rgba(10,37,88,0.3)'
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                {isPlaying ? (
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                ) : (
+                  <path d="M8 5v14l11-7z"/>
+                )}
+              </svg>
+              <span>{isPlaying ? 'Speaking Dialect...' : `Speak Word (${accent} English)`}</span>
+            </button>
+          </div>
+
+          {/* Tactile Sliders for Rate & Pitch */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container)',
+            borderRadius: 20,
+            padding: 16,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 14
+          }}>
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
+                  Playback Speed (Rate)
+                </span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  {rate}x
+                </span>
+              </div>
+              <input
+                type="range"
+                min="0.5"
+                max="1.5"
+                step="0.05"
+                value={rate}
+                onChange={(e) => setRate(parseFloat(e.target.value))}
+              />
+            </div>
+
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--md-sys-color-on-surface)' }}>
+                  Acoustic Pitch
+                </span>
+                <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  {pitch}x
+                </span>
+              </div>
+              <input
+                type="range"
+                min="0.5"
+                max="1.5"
+                step="0.05"
+                value={pitch}
+                onChange={(e) => setPitch(parseFloat(e.target.value))}
+              />
+            </div>
+          </div>
+
+          {/* Quick Word Presets Chips */}
+          <div>
+            <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', letterSpacing: '0.05em' }}>
+              Hard Phonetics Quick Select:
+            </span>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
+              {presets.map((p) => (
+                <button
+                  key={p.word}
+                  onClick={() => setWord(p.word)}
+                  className="spring-press"
+                  style={{
+                    background: word.toLowerCase() === p.word.toLowerCase()
+                      ? 'var(--md-sys-color-primary)'
+                      : 'var(--md-sys-color-surface-container-high)',
+                    color: word.toLowerCase() === p.word.toLowerCase() ? '#FFFFFF' : 'var(--md-sys-color-on-surface)',
+                    border: 'none',
+                    padding: '7px 12px',
+                    borderRadius: 12,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {p.word}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- SCREEN 3: Smart Dictionary ---
+    function DictionaryScreen() {
+      const [searchQuery, setSearchQuery] = useState("serendipity");
+      const [wordData, setWordData] = useState({
+        word: "serendipity",
+        phonetic: "/ˌser.ənˈdɪp.ə.ti/",
+        partOfSpeech: "noun",
+        definition: "The occurrence and development of events by chance in a happy or beneficial way.",
+        example: "A fortunate stroke of serendipity brought the two researchers together at the conference.",
+        synonyms: ["fluke", "coincidence", "fortune", "providence", "luck"]
+      });
+
+      const handleSearch = (w) => {
+        setSearchQuery(w);
+        if (w.toLowerCase() === "ubiquitous") {
+          setWordData({
+            word: "ubiquitous",
+            phonetic: "/juːˈbɪk.wɪ.təs/",
+            partOfSpeech: "adjective",
+            definition: "Present, appearing, or found everywhere at once.",
+            example: "Mobile smartphones have become ubiquitous in modern global society.",
+            synonyms: ["omnipresent", "everywhere", "pervasive", "universal"]
+          });
+        } else if (w.toLowerCase() === "ephemeral") {
+          setWordData({
+            word: "ephemeral",
+            phonetic: "/ɪˈfem.ər.əl/",
+            partOfSpeech: "adjective",
+            definition: "Lasting for a very short time; transitory; fleeting.",
+            example: "The ephemeral beauty of cherry blossoms draws millions of admirers every spring.",
+            synonyms: ["fleeting", "transient", "momentary", "short-lived"]
+          });
+        } else {
+          setWordData({
+            word: w,
+            phonetic: `/ˈ${w.toLowerCase()}/`,
+            partOfSpeech: "noun",
+            definition: `The characteristic meaning or quality of ${w} within educational lexicon contexts.`,
+            example: `She applied the principles of ${w} to solve the linguistic puzzle.`,
+            synonyms: ["insight", "clarity", "precision"]
+          });
+        }
+      };
+
+      return (
+        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 38,
+                height: 38,
+                borderRadius: 14,
+                background: 'var(--md-sys-color-tertiary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#A4F2DC',
+                fontWeight: 900,
+                fontSize: 18
+              }}>
+                📖
+              </div>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  Smart Dictionary
+                </h2>
+                <span style={{ fontSize: 11, color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>
+                  Definitions, Etymology &amp; Synonyms
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Search Input Bar */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            background: 'var(--md-sys-color-surface-container-high)',
+            borderRadius: 999,
+            padding: '4px 8px 4px 16px',
+            gap: 8,
+            boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.06)'
+          }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--md-sys-color-outline)">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+              placeholder="Search English lexicon..."
+              style={{
+                flex: 1,
+                border: 'none',
+                background: 'transparent',
+                outline: 'none',
+                fontFamily: 'var(--font-body)',
+                fontSize: 13,
+                fontWeight: 600,
+                color: 'var(--md-sys-color-on-surface)'
+              }}
+            />
+            <button
+              onClick={() => handleSearch(searchQuery)}
+              className="spring-press"
+              style={{
+                background: 'var(--md-sys-color-primary)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '8px 14px',
+                borderRadius: 999,
+                fontSize: 11,
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              Search
+            </button>
+          </div>
+
+          {/* Word Definition Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-lowest, #FFFFFF)',
+            borderRadius: 24,
+            padding: 20,
+            border: '2px solid var(--md-sys-color-surface-container-high)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <div>
+                <h1 style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 26,
+                  fontWeight: 900,
+                  color: 'var(--md-sys-color-primary)',
+                  letterSpacing: '-0.02em'
+                }}>
+                  {wordData.word}
+                </h1>
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 13,
+                  color: 'var(--md-sys-color-primary)',
+                  fontWeight: 700
+                }}>
+                  {wordData.phonetic}
+                </span>
+              </div>
+              <span style={{
+                background: 'var(--md-sys-color-secondary-container)',
+                color: 'var(--md-sys-color-on-secondary-container)',
+                padding: '4px 10px',
+                borderRadius: 999,
+                fontSize: 11,
+                fontWeight: 800,
+                textTransform: 'uppercase'
+              }}>
+                {wordData.partOfSpeech}
+              </span>
+            </div>
+
+            <div style={{
+              background: 'var(--md-sys-color-surface-container-low)',
+              borderRadius: 16,
+              padding: 14,
+              borderLeft: '4px solid var(--md-sys-color-primary)'
+            }}>
+              <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 4 }}>
+                Definition:
+              </span>
+              <p style={{ fontSize: 13, color: 'var(--md-sys-color-on-surface)', lineHeight: 1.5, fontWeight: 500 }}>
+                {wordData.definition}
+              </p>
+            </div>
+
+            <div style={{ padding: '0 4px' }}>
+              <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 2 }}>
+                Contextual Example:
+              </span>
+              <p style={{ fontSize: 12, fontStyle: 'italic', color: 'var(--md-sys-color-on-surface-variant)', lineHeight: 1.4 }}>
+                "{wordData.example}"
+              </p>
+            </div>
+
+            {/* Synonyms Chips */}
+            <div>
+              <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 6 }}>
+                Synonyms (Tap to Explore):
+              </span>
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {wordData.synonyms.map((syn) => (
+                  <button
+                    key={syn}
+                    onClick={() => handleSearch(syn)}
+                    className="spring-press"
+                    style={{
+                      background: 'var(--md-sys-color-primary-container)',
+                      color: 'var(--md-sys-color-on-primary-container)',
+                      border: 'none',
+                      padding: '5px 12px',
+                      borderRadius: 999,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {syn}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Discover Words */}
+          <div>
+            <span style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', letterSpacing: '0.05em' }}>
+              Vocabulary Highlights:
+            </span>
+            <div style={{ display: 'flex', gap: 6, marginTop: 6 }}>
+              {["serendipity", "ubiquitous", "ephemeral"].map((w) => (
+                <button
+                  key={w}
+                  onClick={() => handleSearch(w)}
+                  className="spring-press"
+                  style={{
+                    flex: 1,
+                    background: 'var(--md-sys-color-surface-container)',
+                    color: 'var(--md-sys-color-on-surface)',
+                    border: '1px solid var(--md-sys-color-surface-container-high)',
+                    padding: '8px 0',
+                    borderRadius: 12,
+                    fontSize: 11,
+                    fontWeight: 700,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {w}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- SCREEN 4: Speak & Translate ---
+    function SpeakTranslateScreen() {
+      const [sourceLang, setSourceLang] = useState("English (US)");
+      const [targetLang, setTargetLang] = useState("Spanish (ES)");
+      const [isListening, setIsListening] = useState(false);
+      const [sourceText, setSourceText] = useState("How do you pronounce this complicated medical term?");
+      const [translatedText, setTranslatedText] = useState("¿Cómo se pronuncia este término médico complicado?");
+      const [copied, setCopied] = useState(false);
+
+      const handleSwap = () => {
+        const tempL = sourceLang;
+        setSourceLang(targetLang);
+        setTargetLang(tempL);
+        const tempT = sourceText;
+        setSourceText(translatedText);
+        setTranslatedText(tempT);
+      };
+
+      const handleMicToggle = () => {
+        setIsListening(!isListening);
+        if (!isListening) {
+          setTimeout(() => {
+            setIsListening(false);
+            setSourceText("Could you please spell that again?");
+            setTranslatedText("¿Podrías deletrear eso de nuevo, por favor?");
+          }, 3000);
+        }
+      };
+
+      return (
+        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 38,
+                height: 38,
+                borderRadius: 14,
+                background: 'var(--md-sys-color-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFFFFF',
+                fontWeight: 900,
+                fontSize: 18
+              }}>
+                🌍
+              </div>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  Speak &amp; Translate
+                </h2>
+                <span style={{ fontSize: 11, color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>
+                  Real-Time Neural Speech Engine
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Language Swap Selector Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container)',
+            borderRadius: 20,
+            padding: '10px 14px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8
+          }}>
+            <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--md-sys-color-primary)', flex: 1, textAlign: 'center' }}>
+              {sourceLang}
+            </span>
+
+            <button
+              onClick={handleSwap}
+              className="spring-press"
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: '50%',
+                background: 'var(--md-sys-color-secondary)',
+                color: '#0A2558',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(255,184,0,0.3)'
+              }}
+            >
+              ⇄
+            </button>
+
+            <span style={{ fontSize: 12, fontWeight: 800, color: 'var(--md-sys-color-primary)', flex: 1, textAlign: 'center' }}>
+              {targetLang}
+            </span>
+          </div>
+
+          {/* Source Text Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-lowest, #FFFFFF)',
+            borderRadius: 20,
+            padding: 16,
+            border: '2px solid var(--md-sys-color-surface-container-high)',
+            minHeight: 90
+          }}>
+            <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 4 }}>
+              Input Text:
+            </span>
+            <p style={{ fontSize: 13, color: 'var(--md-sys-color-on-surface)', lineHeight: 1.5, fontWeight: 500 }}>
+              {sourceText}
+            </p>
+          </div>
+
+          {/* Big Expressive Microphone Action Button */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, margin: '4px 0' }}>
+            <div style={{ position: 'relative' }}>
+              {isListening && (
+                <div style={{
+                  position: 'absolute',
+                  inset: -12,
+                  borderRadius: '50%',
+                  background: 'var(--md-sys-color-secondary)',
+                  opacity: 0.4,
+                  animation: 'pulseRing 1.4s infinite'
+                }} />
+              )}
+              <button
+                onClick={handleMicToggle}
+                className="spring-press"
+                style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: '50%',
+                  background: isListening ? '#EF4444' : 'var(--md-sys-color-primary)',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  fontSize: 26,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 8px 24px rgba(10,37,88,0.35)',
+                  position: 'relative',
+                  zIndex: 2
+                }}
+              >
+                🎤
+              </button>
+            </div>
+            <span style={{ fontSize: 11, fontWeight: 700, color: isListening ? '#EF4444' : 'var(--md-sys-color-outline)' }}>
+              {isListening ? 'Listening via System Speech Dialog...' : 'Tap Mic to Speak'}
+            </span>
+          </div>
+
+          {/* Translated Result Card */}
+          <div style={{
+            background: 'var(--md-sys-color-primary-container)',
+            color: 'var(--md-sys-color-on-primary-container)',
+            borderRadius: 22,
+            padding: 16,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Translation Result:
+              </span>
+              <button
+                onClick={() => {
+                  navigator.clipboard?.writeText(translatedText);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 1500);
+                }}
+                className="spring-press"
+                style={{
+                  background: 'rgba(255,255,255,0.6)',
+                  border: 'none',
+                  padding: '4px 10px',
+                  borderRadius: 999,
+                  fontSize: 10,
+                  fontWeight: 700,
+                  color: 'var(--md-sys-color-on-primary-container)',
+                  cursor: 'pointer'
+                }}
+              >
+                {copied ? '✓ Copied' : 'Copy'}
+              </button>
+            </div>
+
+            <p style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.5 }}>
+              {translatedText}
+            </p>
+
+            <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
+              <button
+                className="spring-press"
+                style={{
+                  background: 'var(--md-sys-color-primary)',
+                  color: '#FFFFFF',
+                  border: 'none',
+                  padding: '6px 14px',
+                  borderRadius: 999,
+                  fontSize: 11,
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4
+                }}
+              >
+                <span>🔊</span> Listen Audio
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // --- SCREEN 5: AI Grammar & Tone Polish ---
+    function AiEnhancerScreen() {
+      const [tone, setTone] = useState("Professional");
+      const [sampleIndex, setSampleIndex] = useState(0);
+
+      const toneVariants = {
+        Professional: {
+          enhanced: "I am writing to confirm receipt of your correspondence regarding the colonel's upcoming appointment.",
+          changes: ["Formalized conversational phrasing", "Optimized honorific spelling", "Enhanced clarity & diplomatic cadence"],
+          badge: "Executive Standard"
+        },
+        Casual: {
+          enhanced: "Got your note about the colonel! Thanks for letting me know so quickly.",
+          changes: ["Relaxed sentence structure", "Friendly tone", "Conversational punctuation"],
+          badge: "Friendly & Warm"
+        },
+        Academic: {
+          enhanced: "This communication serves to formally acknowledge the transmission pertinent to the aforementioned officer.",
+          changes: ["Elevated vocabulary precision", "Syntactic rigor", "Passive clarity"],
+          badge: "Research Tone"
+        },
+        Concise: {
+          enhanced: "Received your note regarding the colonel. Thank you.",
+          changes: ["Trimmed 45% filler words", "Direct action sentence", "Maximum readability"],
+          badge: "Brevity Optimized"
+        },
+        Creative: {
+          enhanced: "Your dispatch arrived like clockwork, carrying curious news of the colonel's journey.",
+          changes: ["Vivid imagery", "Rhythmic meter", "Evocative tone"],
+          badge: "Story & Flair"
+        }
+      };
+
+      const originalText = "i just got your message about the colonel guy thanks a lot";
+
+      return (
+        <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+          {/* Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{
+                width: 38,
+                height: 38,
+                borderRadius: 14,
+                background: 'var(--md-sys-color-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FFC900',
+                fontWeight: 900,
+                fontSize: 18
+              }}>
+                ✨
+              </div>
+              <div>
+                <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 800, color: 'var(--md-sys-color-primary)' }}>
+                  AI Grammar Polish
+                </h2>
+                <span style={{ fontSize: 11, color: 'var(--md-sys-color-on-surface-variant)', fontWeight: 600 }}>
+                  Stylistic Refinement &amp; Tone Tuning
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Tone Selector Pills */}
+          <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 4 }}>
+            {["Professional", "Casual", "Academic", "Concise", "Creative"].map((t) => (
+              <button
+                key={t}
+                onClick={() => setTone(t)}
+                className="spring-press"
+                style={{
+                  background: tone === t ? 'var(--md-sys-color-secondary)' : 'var(--md-sys-color-surface-container)',
+                  color: tone === t ? '#121212' : 'var(--md-sys-color-on-surface)',
+                  border: 'none',
+                  padding: '7px 14px',
+                  borderRadius: 999,
+                  fontSize: 11,
+                  fontWeight: 800,
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+
+          {/* Original Draft Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-high)',
+            borderRadius: 20,
+            padding: 14
+          }}>
+            <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 4 }}>
+              Original Draft:
+            </span>
+            <p style={{ fontSize: 12.5, color: 'var(--md-sys-color-on-surface-variant)', fontStyle: 'italic', lineHeight: 1.4 }}>
+              "{originalText}"
+            </p>
+          </div>
+
+          {/* Enhanced Result Card */}
+          <div style={{
+            background: 'var(--md-sys-color-surface-container-lowest, #FFFFFF)',
+            borderRadius: 24,
+            padding: 18,
+            border: '2px solid var(--md-sys-color-primary)',
+            boxShadow: '0 8px 24px -8px rgba(10,37,88,0.12)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{
+                background: 'var(--md-sys-color-primary)',
+                color: '#FFC900',
+                padding: '3px 10px',
+                borderRadius: 999,
+                fontSize: 10,
+                fontWeight: 800
+              }}>
+                {toneVariants[tone].badge}
+              </span>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--md-sys-color-tertiary)' }}>
+                100% On-Device Suggestion
+              </span>
+            </div>
+
+            <p style={{
+              fontSize: 14,
+              fontWeight: 700,
+              color: 'var(--md-sys-color-primary)',
+              lineHeight: 1.5,
+              fontFamily: 'var(--font-body)'
+            }}>
+              {toneVariants[tone].enhanced}
+            </p>
+
+            {/* Stylistic Change Badges */}
+            <div style={{ paddingTop: 8, borderTop: '1px solid var(--md-sys-color-surface-container)' }}>
+              <span style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', color: 'var(--md-sys-color-outline)', display: 'block', marginBottom: 6 }}>
+                Linguistic Enhancements:
+              </span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {toneVariants[tone].changes.map((ch, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--md-sys-color-on-surface)' }}>
+                    <span style={{ color: 'var(--md-sys-color-secondary)', fontWeight: 900 }}>✓</span>
+                    <span>{ch}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigator.clipboard?.writeText(toneVariants[tone].enhanced)}
+              className="spring-press"
+              style={{
+                marginTop: 6,
+                background: 'var(--md-sys-color-primary)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '10px 16px',
+                borderRadius: 999,
+                fontSize: 12,
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 6
+              }}
+            >
+              <span>Copy Enhanced Version</span>
+              <span style={{ color: '#FFC900' }}>→</span>
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // --- Interactive Multi-Screen Prototype Device Container ---
+    function InteractivePhone({ initialScreen, screenTitle }) {
+      const [currentTab, setCurrentTab] = useState(initialScreen);
+
+      return (
+        <AndroidFrame screenTitle={screenTitle}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1 }}>
+              {currentTab === 'spell' && <SpellCheckerScreen onNavigate={setCurrentTab} />}
+              {currentTab === 'pronounce' && <PronunciationScreen onNavigate={setCurrentTab} />}
+              {currentTab === 'dictionary' && <DictionaryScreen onNavigate={setCurrentTab} />}
+              {currentTab === 'translate' && <SpeakTranslateScreen onNavigate={setCurrentTab} />}
+              {currentTab === 'ai' && <AiEnhancerScreen onNavigate={setCurrentTab} />}
+            </div>
+            <M3BottomNav currentTab={currentTab} onTabSelect={setCurrentTab} />
+          </div>
+        </AndroidFrame>
+      );
+    }
+
+    // --- Master Showcase Exhibition Board ---
+    function App() {
+      const screens = [
+        { id: 'spell', title: 'Screen 1 · Spell Checker Studio' },
+        { id: 'pronounce', title: 'Screen 2 · Phonetic Pronunciation Lab' },
+        { id: 'dictionary', title: 'Screen 3 · Smart Offline Dictionary' },
+        { id: 'translate', title: 'Screen 4 · Speak & Translate Studio' },
+        { id: 'ai', title: 'Screen 5 · AI Grammar & Tone Polish' }
+      ];
+
+      return (
+        <div style={{ maxWidth: 2100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 36 }}>
+          {/* Exhibition Board Header */}
+          <header style={{
+            background: 'linear-gradient(135deg, #101B33 0%, #0A1224 100%)',
+            borderRadius: 32,
+            padding: '36px 44px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+            boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 20 }}>
+              <div>
+                <div style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  background: 'rgba(255, 184, 0, 0.15)',
+                  border: '1px solid rgba(255, 184, 0, 0.4)',
+                  padding: '6px 14px',
+                  borderRadius: 999,
+                  color: '#FFC900',
+                  fontSize: 11,
+                  fontWeight: 800,
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  marginBottom: 12
+                }}>
+                  <span>⚡</span> Material 3 Expressive &bull; Android 15 Design System
+                </div>
+
+                <h1 style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 42,
+                  fontWeight: 900,
+                  letterSpacing: '-0.02em',
+                  color: '#FFFFFF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 14
+                }}>
+                  <span>SpellMaster Pro</span>
+                  <span style={{
+                    background: '#FFB800',
+                    color: '#0A2558',
+                    padding: '2px 14px',
+                    borderRadius: 999,
+                    fontSize: 20,
+                    fontWeight: 900
+                  }}>
+                    M3 Prototype
+                  </span>
+                </h1>
+
+                <p style={{
+                  fontSize: 16,
+                  color: '#94A3B8',
+                  maxWidth: 820,
+                  lineHeight: 1.6,
+                  marginTop: 6
+                }}>
+                  High-fidelity interactive prototype demonstrating <strong>Material 3 Expressive</strong>:
+                  punchy typography, energetic deep navy (#0A2558) and vibrant yellow (#FFB800) containers,
+                  28px expressive squircle cards, spring tactile interactions, and on-device offline intelligence.
+                </p>
+              </div>
+
+              {/* Design System Spec Tokens Strip */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: 20,
+                padding: '16px 22px',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, auto)',
+                gap: '12px 24px',
+                fontSize: 12
+              }}>
+                <div><span style={{ color: '#64748B' }}>Primary:</span> <strong style={{ color: '#DDE5F8' }}>#0A2558 (Deep Navy)</strong></div>
+                <div><span style={{ color: '#64748B' }}>Accent:</span> <strong style={{ color: '#FFB800' }}>#FFB800 (Amber)</strong></div>
+                <div><span style={{ color: '#64748B' }}>Typography:</span> <strong style={{ color: '#FFFFFF' }}>Outfit &amp; Jakarta</strong></div>
+                <div><span style={{ color: '#64748B' }}>Shape Scale:</span> <strong style={{ color: '#FFFFFF' }}>28px / Full Pill</strong></div>
+                <div><span style={{ color: '#64748B' }}>Motion Engine:</span> <strong style={{ color: '#FFC900' }}>bouncy-spring</strong></div>
+                <div><span style={{ color: '#64748B' }}>Frame Target:</span> <strong style={{ color: '#FFFFFF' }}>Pixel 8 / Android 15</strong></div>
+              </div>
+            </div>
+
+            {/* Quick Interactive Guide */}
+            <div style={{
+              background: 'rgba(255, 184, 0, 0.08)',
+              border: '1px solid rgba(255, 184, 0, 0.2)',
+              borderRadius: 14,
+              padding: '10px 18px',
+              fontSize: 13,
+              color: '#FFD83D',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 12
+            }}>
+              <span>
+                💡 <strong>Every screen is an active interactive prototype!</strong> You can click typos to correct them, slide pitch/speed sliders, tap synonyms in the dictionary, pulse the translation microphone, and toggle AI tones. The bottom navigation bar on each device works independently.
+              </span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, background: 'rgba(0,0,0,0.3)', padding: '4px 10px', borderRadius: 8 }}>
+                5 Parallel Device Viewports
+              </span>
+            </div>
+          </header>
+
+          {/* Exhibition Canvas: 5 Side-by-Side Interactive Android Frames */}
+          <div style={{
+            display: 'flex',
+            gap: 32,
+            overflowX: 'auto',
+            paddingBottom: 24,
+            alignItems: 'flex-start'
+          }}>
+            {screens.map((sc) => (
+              <InteractivePhone
+                key={sc.id}
+                initialScreen={sc.id}
+                screenTitle={sc.title}
+              />
+            ))}
+          </div>
+
+          {/* Architectural Notes Footer */}
+          <footer style={{
+            textAlign: 'center',
+            fontSize: 13,
+            color: '#64748B',
+            padding: '24px 0',
+            borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+          }}>
+            SpellMaster Pro &bull; Material 3 Expressive UI/UX Architecture Prototype &bull; Pure Standalone HTML with Inline React &bull; Verified for Google Play Submission
+          </footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
