@@ -9,6 +9,7 @@
       --primary: #09245F;
       --primary-dark: #051433;
       --accent: #FFC900;
+      --accent-warm: #FFD83D;
       --text: #10295F;
       --text-muted: #536b9e;
       --bg: #EEF2FF;
@@ -17,17 +18,17 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.7;
       color: var(--text);
       background-color: var(--bg);
       margin: 0;
       padding: 40px 20px;
     }
     .container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       background: var(--card);
-      padding: 44px;
+      padding: 48px;
       border-radius: 20px;
       border: 1px solid var(--border);
       box-shadow: 0 10px 30px rgba(9, 36, 95, 0.08);
@@ -78,7 +79,7 @@
     h2 {
       color: var(--primary);
       font-size: 18px;
-      margin-top: 32px;
+      margin-top: 34px;
       border-left: 4px solid var(--accent);
       padding-left: 12px;
       font-weight: 700;
@@ -127,7 +128,7 @@
       font-family: monospace;
     }
     footer {
-      margin-top: 44px;
+      margin-top: 48px;
       padding-top: 24px;
       border-top: 1px solid var(--border);
       font-size: 13px;
@@ -155,63 +156,81 @@
       <img src="../assets/images/spellmaster_icon.png" alt="SpellMaster Pro Logo">
       <div>
         <h1>Privacy Policy for SpellMaster Pro</h1>
-        <div class="meta-date">Application ID: <code>com.devang.spellmaster.pro</code> &bull; Effective Date: November 14, 2026</div>
-        <span class="badge-pill">100% On-Device Architecture</span>
+        <div class="meta-date">Application ID: <code>com.devang.spellmaster.pro</code> &bull; Effective Date: November 14, 2026 &bull; Last Updated: November 14, 2026</div>
+        <span class="badge-pill">On-Device Lexicon &amp; User Privacy</span>
       </div>
     </div>
 
     <div class="highlight-box">
-      <p><strong>Executive Summary:</strong> SpellMaster Pro is engineered as a privacy-first educational tool. With an embedded offline lexicon of 180,000+ words, on-device speech synthesis, and zero telemetry SDKs, your input, queries, voice, and translations are strictly private. We do not track, log, profile, transmit, or monetize your personal information.</p>
+      <p><strong>Executive Summary:</strong> SpellMaster Pro is designed to help users improve English spelling, pronunciation, vocabulary, and writing clarity. Core linguistic calculations—including spell checks, candidate suggestions, and speech synthesis—execute locally on your device via an embedded SQLite lexicon and Android's native Text-to-Speech engine. We do not sell, harvest, or log your personal text, search queries, or voice dictations. To support ongoing maintenance, continuous development, and free access, the application integrates industry-standard advertising through Google AdMob in full compliance with Google Play Developer Policies.</p>
     </div>
 
-    <h2>1. Zero Tracking & No Data Harvesting</h2>
-    <ul>
-      <li><strong>No Personal Identifiers:</strong> SpellMaster Pro does not collect, log, transmit, or store your name, email, phone number, device IMEI, Android ID, Advertising ID (GAID), or GPS location.</li>
-      <li><strong>No Keystroke Logging:</strong> All typed queries, spell checks, and dictionary lookups are processed strictly in volatile device memory and discarded immediately after use.</li>
-      <li><strong>Zero Advertising & Analytics SDKs:</strong> The application contains <strong>zero third-party ad networks</strong> (no AdMob, AppLovin, Unity) and <strong>zero analytics SDKs</strong> (no Firebase Analytics, Adjust, AppsFlyer, or Facebook SDK).</li>
-    </ul>
+    <h2>1. Introduction &amp; Applicability</h2>
+    <p>This Privacy Policy describes how <strong>SpellMaster Pro</strong> ("we", "us", "our", or "the Application"), developed by <strong>Devang Bhumbhaliya Babubhai</strong>, collects, processes, protects, and discloses information when you use our Android mobile application. We are committed to transparency and to complying with the <strong>Google Play Developer Distribution Agreement</strong>, <strong>Google Play User Data Policies</strong>, the General Data Protection Regulation (<strong>GDPR</strong>), the California Consumer Privacy Act (<strong>CCPA</strong>), and the Children's Online Privacy Protection Act (<strong>COPPA</strong>).</p>
 
-    <h2>2. 100% On-Device Local Processing</h2>
+    <h2>2. Information We Process &amp; On-Device Operations</h2>
+    <p>SpellMaster Pro prioritizes on-device computation to ensure user text remains private and responsive:</p>
     <ul>
-      <li><strong>Offline Frequency Lexicon:</strong> The core spell checker relies on a local database (<code>suggestion_database.sqlite</code>) embedded directly inside the application bundle. Typo detection, candidate generation, and Levenshtein distance calculations run 100% locally on your device CPU with zero internet dependency.</li>
-      <li><strong>Pronunciation Audio Studio:</strong> Audio pronunciation is powered by Android's native on-device <code>TextToSpeech</code> engine. Speech rate, pitch, and accent synthesis execute locally on hardware without recording or uploading audio.</li>
+      <li><strong>Offline Frequency Lexicon:</strong> The core spell checker operates with an embedded local SQLite database (<code>suggestion_database.sqlite</code>) containing over 180,000 verified English words. Typo detection, candidate generation, and Levenshtein distance computations execute entirely on your device CPU with zero server dependency.</li>
+      <li><strong>Pronunciation Audio Studio:</strong> Audio playback is synthesized locally using Android's native on-device <code>TextToSpeech</code> service. Dialect rates, pitches, and pronunciations are processed on hardware without transmitting or saving audio files.</li>
+      <li><strong>No Keystroke Logging:</strong> Words entered into the input fields are processed in temporary volatile memory and are never recorded, profiled, or harvested.</li>
+      <li><strong>Voice Dictation:</strong> When using voice input, requests are handled directly by Android's built-in system speech recognizer (<code>RecognizerIntent.ACTION_RECOGNIZE_SPEECH</code>). The application does not record raw microphone audio, does not store voice recordings, and does not require the dangerous <code>android.permission.RECORD_AUDIO</code> permission.</li>
     </ul>
 
     <h2>3. Optional User-Initiated Network Services</h2>
-    <p>Extended features utilize public educational endpoints only when explicitly requested by the user:</p>
+    <p>Certain educational tools connect to external services only when explicitly initiated by the user:</p>
     <ul>
-      <li><strong>Smart English Dictionary:</strong> Online word definitions, synonyms, and phonetic etymologies query public educational endpoints (such as <code>api.dictionaryapi.dev</code> and <code>api.datamuse.com</code>). No user tokens, tracking cookies, or device IDs are attached to these requests. When disconnected, the app seamlessly serves definitions from its local offline vocabulary store.</li>
-      <li><strong>Speak & Translate:</strong> User-initiated translation requests are transmitted securely via encrypted HTTPS directly to translation service endpoints. We do not store, log, or profile your text on external servers.</li>
+      <li><strong>Smart English Dictionary:</strong> Online word definitions, synonyms, and phonetic etymologies query public educational endpoints (such as <code>api.dictionaryapi.dev</code> and <code>api.datamuse.com</code>). These requests do not transmit personal user identifiers, account credentials, or tracking cookies. If the device is offline, the app automatically falls back to its local definitions.</li>
+      <li><strong>Speak &amp; Translate:</strong> When you initiate text translation, the input text is transmitted securely over an encrypted HTTPS connection to translation endpoints to generate the translation. Translated phrases are not stored or profiled on remote servers.</li>
     </ul>
 
-    <h2>4. Android Device Permissions (Zero Sensitive Permissions)</h2>
-    <p>SpellMaster Pro adheres to the principle of least privilege and requires <strong>zero dangerous or sensitive permissions</strong>:</p>
+    <h2>4. Third-Party Advertising (Google AdMob)</h2>
+    <p>To support ongoing updates, lexicon improvements, and free accessibility, SpellMaster Pro may display advertisements served by <strong>Google AdMob</strong> and its certified advertising technology partners.</p>
     <ul>
-      <li><code>android.permission.INTERNET</code>: Used solely to fetch dictionary definitions and language translations upon explicit user request.</li>
-      <li><code>android.permission.ACCESS_NETWORK_STATE</code>: Used to verify network availability before attempting online lookups, enabling instant offline fallback.</li>
-      <li><code>android.permission.VIBRATE</code>: Provides tactile haptic feedback during interactive controls.</li>
-      <li><strong>Microphone Governance:</strong> Voice input is delegated entirely to Android's native system speech recognizer dialog (<code>RecognizerIntent.ACTION_RECOGNIZE_SPEECH</code>). SpellMaster Pro does not record, access, or store microphone hardware streams, and does not declare or require <code>android.permission.RECORD_AUDIO</code>.</li>
+      <li><strong>Advertising Identifiers &amp; Telemetry:</strong> In accordance with Google Play Developer Policies, Google AdMob may automatically collect and process pseudonymous identifiers, such as the Google Advertising ID (<code>AD_ID</code> / GAID), IP address, general device telemetry (device brand, model, screen resolution, operating system version), and coarse regional location. This information is used to serve relevant contextual or personalized ads, limit ad frequency, and detect invalid traffic or ad click fraud.</li>
+      <li><strong>Separation of Educational Content:</strong> Your personal input text, spell-check queries, dictionary lookups, voice inputs, and translations are NEVER shared with, exposed to, or accessible by Google AdMob or any advertising networks.</li>
+      <li><strong>User Advertising Controls &amp; Opt-Out:</strong> You have full control over interest-based advertising on Android:
+        <ul>
+          <li>You can reset or completely delete your Advertising ID at any time via your device settings: <strong>Settings &gt; Google &gt; Ads &gt; Reset or Delete advertising ID</strong>.</li>
+          <li>On Android 12 and above, deleting your advertising ID prevents apps from accessing it, ensuring you receive only contextual advertisements.</li>
+        </ul>
+      </li>
+      <li>For comprehensive information regarding how Google processes advertising data, please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">Google's Privacy Policy</a> and <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">How Google uses information from sites or apps that use our services</a>.</li>
     </ul>
 
-    <h2>5. Children's Privacy (COPPA Compliance)</h2>
-    <p>SpellMaster Pro is designed for learners, students, and professionals of all ages, including children under the age of 13. The application does not collect personal data from any user, contains no behavioral profiling, and displays no external advertisements or tracking links.</p>
-
-    <h2>6. Google Play Data Safety Declaration Summary</h2>
+    <h2>5. Android Device Permissions</h2>
+    <p>SpellMaster Pro adheres to the principle of least privilege. The application requests only the permissions necessary to function:</p>
     <ul>
-      <li><strong>Data Collection:</strong> No user data is collected.</li>
-      <li><strong>Data Sharing:</strong> No user data is shared with third parties.</li>
-      <li><strong>Security Practices:</strong> All optional network lookups use industry-standard encrypted HTTPS.</li>
-      <li><strong>Data Retention & Deletion:</strong> No data is retained on external servers. All local caches can be wiped instantly by the user via standard Android Application Settings.</li>
+      <li><code>android.permission.INTERNET</code>: Enables online dictionary lookups, translation requests, and ad retrieval.</li>
+      <li><code>android.permission.ACCESS_NETWORK_STATE</code>: Checks whether the device is connected to the internet to gracefully switch between online services and offline SQLite mode.</li>
+      <li><code>android.permission.VIBRATE</code>: Provides subtle tactile haptic feedback during interactive controls and sliders.</li>
+      <li><code>com.google.android.gms.permission.AD_ID</code>: Standard permission declared in modern Android versions (API 33+) to allow Google AdMob to deliver ads in compliance with Google Play governance.</li>
+      <li><strong>No Sensitive Permissions:</strong> SpellMaster Pro does not request access to camera, microphone (<code>RECORD_AUDIO</code>), GPS location, phone state, contacts, or local file storage.</li>
     </ul>
 
-    <h2>7. Security Safeguards</h2>
-    <p>All on-device computation takes place within Android's sandboxed application execution environment. Application binaries are signed with Google Play App Signing and protected by ProGuard obfuscation rules to prevent tampering and ensure code integrity.</p>
+    <h2>6. Data Security Safeguards</h2>
+    <p>We implement multiple layers of security to protect your data:</p>
+    <ul>
+      <li>All network requests for dictionary lookups, translations, and advertisements utilize strict encrypted HTTPS (TLS) connections.</li>
+      <li>On-device computation runs within Android's sandboxed application environment, preventing unauthorized access by other applications.</li>
+      <li>The application binary is signed with Google Play App Signing and protected by ProGuard/R8 code optimization and obfuscation.</li>
+    </ul>
 
-    <h2>8. Policy Updates</h2>
-    <p>We may update this Privacy Policy periodically to reflect app enhancements or regulatory requirements. Any modifications will be posted to this official URL with a revised effective date.</p>
+    <h2>7. Children's Privacy (COPPA Compliance)</h2>
+    <p>SpellMaster Pro is designed for general audiences, students, and language learners. We do not knowingly collect personal information from children under the age of 13. When operating in family-directed modes or when required by Google Play Families Policy, ad requests are configured to request non-personalized, family-safe advertisements in compliance with COPPA and Google Play Families guidelines.</p>
 
-    <h2>9. Developer & Support Contact</h2>
-    <p>For questions, feedback, or governance inquiries regarding SpellMaster Pro, please contact:</p>
+    <h2>8. Data Retention &amp; User Rights (GDPR &amp; CCPA)</h2>
+    <p>Because SpellMaster Pro does not maintain user accounts or store personal information on remote servers, we do not retain your personal data. Users retain the following rights:</p>
+    <ul>
+      <li><strong>Local Cache Clearing:</strong> You can wipe all locally cached data, settings, and temporary lookups at any time through Android Settings &gt; Apps &gt; SpellMaster Pro &gt; Storage &gt; Clear Storage.</li>
+      <li><strong>Right to Non-Discrimination:</strong> We do not sell your personal information, and your use of SpellMaster Pro remains fully functional regardless of your privacy choices.</li>
+    </ul>
+
+    <h2>9. Changes to This Privacy Policy</h2>
+    <p>We may update this Privacy Policy from time to time to reflect feature enhancements, new releases, or regulatory modifications. Any changes will be posted directly to this URL with a revised "Last Updated" timestamp.</p>
+
+    <h2>10. Developer Contact &amp; Support</h2>
+    <p>If you have any questions, suggestions, or concerns regarding this Privacy Policy or SpellMaster Pro, please contact us directly:</p>
     <p>
       <strong>Developer:</strong> Devang Bhumbhaliya Babubhai<br>
       <strong>Email:</strong> <a href="mailto:devangrabari7072@gmail.com" style="color:var(--primary); font-weight:600;">devangrabari7072@gmail.com</a><br>
@@ -219,7 +238,7 @@
     </p>
 
     <footer>
-      &copy; 2026 SpellMaster Pro. All rights reserved. &bull;
+      &copy; 2026 SpellMaster Pro &bull; Devang Bhumbhaliya Babubhai &bull; All rights reserved. &bull;
       <a href="terms.html">Terms of Service</a> &bull;
       <a href="../">Developer Apps Hub</a>
     </footer>
